@@ -27,6 +27,7 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    System.out.println("X: " + OI.xBoxControl.getX() + "Y: " + OI.xBoxControl.getY());
     DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
   }
 

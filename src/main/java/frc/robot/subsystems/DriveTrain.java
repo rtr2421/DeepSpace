@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public static void drive(double leftSpeed, double rightSpeed) {
-    diffDrive.tankDrive(leftSpeed, rightSpeed);
+    diffDrive.arcadeDrive(leftSpeed, rightSpeed);
   }
 
   @Override
