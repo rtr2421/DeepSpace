@@ -22,15 +22,17 @@ public class PneumaticsDrive extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    System.out.println("init");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.xBoxControl.getTriggerAxis(Hand.kLeft)>.1) {
+    System.out.println("exec");
+    if(OI.xBoxControl.getTriggerAxis(Hand.kLeft)>0) {
       Pneumatics.retract();
     }
-    if(OI.xBoxControl.getTriggerAxis(Hand.kRight)>.1) {
+    if(OI.xBoxControl.getTriggerAxis(Hand.kRight)>0) {
       Pneumatics.extend();
     }
     

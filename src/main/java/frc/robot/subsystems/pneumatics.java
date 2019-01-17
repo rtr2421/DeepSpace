@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
+import frc.robot.commands.PneumaticsDrive;
 
 /**
  * Add your docs here.
@@ -24,9 +26,12 @@ public class Pneumatics extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new PneumaticsDrive());
   }
 
   public static void extend() {
+    compressor.setClosedLoopControl(true);
+    compressor.start();
     doubleSol.set(DoubleSolenoid.Value.kForward);
   }
   public static void retract() {

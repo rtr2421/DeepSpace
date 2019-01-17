@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,4 +46,8 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public static XboxController xBoxControl = new XboxController(0);
+
+  public OI() {
+   // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
+  }
 }
