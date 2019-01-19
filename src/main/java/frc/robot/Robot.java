@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   Compressor com = new Compressor(0);
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-  public static SerialDistance m_serialPort = new SerialDistance();
+  public static SerialDistance m_serialPort;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -58,6 +58,7 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     Scheduler.getInstance().add(new Teleop());
+    m_serialPort = new SerialDistance();
   }
 
   /**

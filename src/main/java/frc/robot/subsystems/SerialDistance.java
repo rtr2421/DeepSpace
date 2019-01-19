@@ -17,7 +17,7 @@ public class SerialDistance extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  //SerialPort sensor = new SerialPort(9600, SerialPort.Port.kOnboard, 8, SerialPort.Parity.kEven, SerialPort.StopBits.kOne);
+  SerialPort sensor = new SerialPort(9600, SerialPort.Port.kOnboard, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
 
   @Override
   public void initDefaultCommand() {
