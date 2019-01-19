@@ -7,34 +7,31 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.SerialDistance;
 
-public class PneumaticsDrive extends Command {
-  public PneumaticsDrive() {
+public class GetDistance extends Command {
+
+    String distance;
+
+  public GetDistance() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_pneumatics);
+    // eg. requires(chassis);
+    requires(Robot.m_serialPort);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("init");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.xBoxControl.getTriggerAxis(Hand.kLeft)>0) {
-      Pneumatics.retract();
-    }
-    if(OI.xBoxControl.getTriggerAxis(Hand.kRight)>0) {
-      Pneumatics.extend();
-    }
-    
+    distance = Robot.m_serialPort.getString();
+    SmartDashboard.putString("distance", distance);
   }
 
   // Make this return true when this Command no longer needs to run execute()

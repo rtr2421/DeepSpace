@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import frc.robot.commands.GetDistance;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,5 +50,7 @@ public class OI {
 
   public OI() {
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
+    Button b1 = new JoystickButton(xBoxControl, 1);
+    b1.whenPressed(new GetDistance());
   }
 }

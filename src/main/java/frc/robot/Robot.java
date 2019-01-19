@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,10 +16,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PneumaticsDrive;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.SerialDistance;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,24 +37,27 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_driveTrain;
   public static Teleop m_teleop;
   Command m_autonomousCommand;
+  Compressor com = new Compressor(0);
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  public static SerialDistance m_serialPort = new SerialDistance();
 
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    * 
    */
   @Override
   public void robotInit() {
+    com.setClosedLoopControl(true);
+    com.start();
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     m_pneumatics = new Pneumatics();
     m_driveTrain = new DriveTrain();
-     //chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
-    
+    Scheduler.getInstance().add(new Teleop());
   }
 
   /**
@@ -118,14 +124,16 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_teleop = new Teleop();
+    Scheduler.getInstance().run();
     
   }
 

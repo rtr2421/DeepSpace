@@ -18,8 +18,8 @@ public class Teleop extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new JoystickDrive());
-    addParallel(new PneumaticsDrive());
+    addParallel(new JoystickDrive());
+    addSequential(new PneumaticsDrive());
     // To run multiple commands at the same time,
     // use addParallel()
     // e.g. addParallel(new Command1());
