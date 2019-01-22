@@ -52,5 +52,6 @@ public class OI {
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
     Button b1 = new JoystickButton(xBoxControl, 1);
     b1.whenPressed(new GetDistance());
+    
   }
 }
