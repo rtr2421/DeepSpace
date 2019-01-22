@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.GetDistance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SerialPort;
 
@@ -22,11 +23,11 @@ public class SerialDistance extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+     setDefaultCommand(new GetDistance());
   }
 
   public String getString()
   {
-    return "";//sensor.readString();
+    return sensor.readString();
   }
 }

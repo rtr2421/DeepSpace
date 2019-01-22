@@ -21,6 +21,7 @@ public class GetDistance extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_serialPort);
+    requires(Robot.m_ultraSonic);
   }
 
   // Called just before this Command runs the first time
@@ -32,7 +33,7 @@ public class GetDistance extends Command {
   @Override
   protected void execute() {
     distance = Robot.m_serialPort.getString();
-    SmartDashboard.putString("distance", distance);
+    SmartDashboard.putString("distance", distance.replace("R",""));
     distanceDouble = Robot.m_ultraSonic.distance();
     SmartDashboard.putString("Distance double", distanceDouble +"");
   }
