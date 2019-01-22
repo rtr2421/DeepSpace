@@ -7,26 +7,26 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * Add your docs here.
  */
-public class SerialDistance extends Subsystem {
+public class Claw extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  SerialPort sensor = new SerialPort(9600, SerialPort.Port.kOnboard, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-
-  public String getString()
-  {
-    return "";//sensor.readString();
+  Spark claw1 = new Spark(4);
+  Spark claw2 = new Spark(5);
+  SpeedControllerGroup motors = new SpeedControllerGroup(claw1, claw2);
+  public static void moveClaw(double speed){
+    
   }
 }

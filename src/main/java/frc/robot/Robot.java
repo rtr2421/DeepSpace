@@ -16,12 +16,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.GetDistance;
 import frc.robot.commands.PneumaticsDrive;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.pneumatics;
 import frc.robot.subsystems.SerialDistance;
+import frc.robot.subsystems.UltraSonic;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,7 +34,7 @@ import frc.robot.subsystems.SerialDistance;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static Pneumatics m_pneumatics;
+  public static pneumatics m_pneumatics;
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
   public static Teleop m_teleop;
@@ -40,6 +42,7 @@ public class Robot extends TimedRobot {
   Compressor com = new Compressor(0);
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   public static SerialDistance m_serialPort;
+  public static UltraSonic m_ultraSonic;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -52,13 +55,15 @@ public class Robot extends TimedRobot {
     com.start();
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    m_pneumatics = new Pneumatics();
+    m_pneumatics = new pneumatics();
     m_driveTrain = new DriveTrain();
     SmartDashboard.putData("Auto mode", m_chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     Scheduler.getInstance().add(new Teleop());
     m_serialPort = new SerialDistance();
+    m_ultraSonic = new UltraSonic();
+    Scheduler.getInstance().add(new GetDistance());
   }
 
   /**

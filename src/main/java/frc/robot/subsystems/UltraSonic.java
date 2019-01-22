@@ -27,13 +27,13 @@ public class UltraSonic extends Subsystem {
     
   }
   public Double distance(){
-    return 0.0;//("volt" * scale factor/sensitivity)
+    return getVoltage()* 100/512;//("volt" * scale factor/sensitivity)
   }
 
   public Double getVoltage()
   {
       Double volt = sonicSensor.getVoltage();
-      SmartDashboard.putNumber("Voltage", volt);
+      SmartDashboard.putNumber("AnalogInput Voltage", volt);
       return volt;
   }
 }

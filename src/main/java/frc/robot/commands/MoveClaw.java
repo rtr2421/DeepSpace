@@ -8,19 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
-import frc.robot.subsystems.SerialDistance;
 
-public class GetDistance extends Command {
-
-    String distance;
-    Double distanceDouble;
-
-  public GetDistance() {
+public class MoveClaw extends Command {
+  public MoveClaw() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_serialPort);
   }
 
   // Called just before this Command runs the first time
@@ -31,10 +23,6 @@ public class GetDistance extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    distance = Robot.m_serialPort.getString();
-    SmartDashboard.putString("distance", distance);
-    distanceDouble = Robot.m_ultraSonic.distance();
-    SmartDashboard.putString("Distance double", distanceDouble +"");
   }
 
   // Make this return true when this Command no longer needs to run execute()
