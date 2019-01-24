@@ -28,11 +28,11 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.xBoxControl.getBumperPressed(Hand.kRight)){
-      DriveTrain.hyperDrive(OI.xBoxControl.getY(),OI.xBoxControl.getX());
-    }else{
-      DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
-    }
+    //if(OI.xBoxControl.getBumperPressed(Hand.kRight)){
+      DriveTrain.drive(OI.xBoxControl.getY(),OI.xBoxControl.getX());
+   // }else{
+     // DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
+   // }
   }
   
 

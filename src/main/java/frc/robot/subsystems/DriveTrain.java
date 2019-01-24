@@ -19,7 +19,8 @@ import frc.robot.commands.JoystickDrive;
 public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private static final Double speedModifier = 0.4;
+  public static boolean fast;
+  private static Double speedModifier = 1.0;
   public Spark sparkL1 = new Spark(0);
   public Spark sparkL2 = new Spark(1);
   public Spark sparkR1 = new Spark(2);
@@ -40,9 +41,7 @@ public class DriveTrain extends Subsystem {
   public static void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
   }
-  public static void hyperDrive(Double leftSpeed,Double rightSpeed){
-    diffDrive.arcadeDrive(leftSpeed, rightSpeed);
-  }
+  
 
   
 
@@ -50,5 +49,11 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new JoystickDrive());
+  }
+  public void setFast(){
+    speedModifier = 1.0;
+  }
+  public void setSlow(){
+    speedModifier = 0.5;
   }
 }

@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.GetDistance;
+import frc.robot.commands.SetSpeed;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,8 +49,11 @@ public class OI {
 
   public OI() {
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
-    Button b1 = new JoystickButton(xBoxControl, 1);
-    b1.whenPressed(new GetDistance());
-    
+    Button b1 = new JoystickButton(xBoxControl, 6);
+    b1.whenPressed(new SetSpeed(true));
+    //b1.whenReleased(new SetSpeed(false));
+
+    Button b2 = new JoystickButton(xBoxControl, 5);
+    b2.whenPressed(new SetSpeed(false));
   }
 }

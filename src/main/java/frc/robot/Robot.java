@@ -53,17 +53,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     com.setClosedLoopControl(true);
     com.start();
-    m_oi = new OI();
+    m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     m_pneumatics = new pneumatics();
-    m_driveTrain = new DriveTrain();
     SmartDashboard.putData("Auto mode", m_chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     Scheduler.getInstance().add(new Teleop());
-    m_serialPort = new SerialDistance();
-    m_ultraSonic = new UltraSonic();
+   // m_serialPort = new SerialDistance();
+   // m_ultraSonic = new UltraSonic();
     Scheduler.getInstance().add(new GetDistance());
+    m_oi = new OI();
   }
 
   /**
