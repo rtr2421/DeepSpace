@@ -19,6 +19,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.GetDistance;
 import frc.robot.commands.PneumaticsDrive;
 import frc.robot.commands.Teleop;
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.pneumatics;
@@ -43,6 +44,7 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   public static SerialDistance m_serialPort;
   public static UltraSonic m_ultraSonic;
+  public static Claw claw;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -53,6 +55,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     com.setClosedLoopControl(true);
     com.start();
+    claw = new Claw();
     m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     m_pneumatics = new pneumatics();
