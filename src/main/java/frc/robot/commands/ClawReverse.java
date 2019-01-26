@@ -11,16 +11,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 
-public class MoveClaw extends Command {
-  public MoveClaw() {
+public class ClawReverse extends Command {
+  public ClawReverse() {
     // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.claw);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Claw.moveClaw(-1);
+    Claw.moveClaw(1);
   }
 
   // Called repeatedly when this Command is scheduled to run

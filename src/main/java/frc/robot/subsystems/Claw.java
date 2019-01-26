@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MoveClaw;
 
 /**
@@ -29,5 +30,7 @@ public class Claw extends Subsystem {
   public static void moveClaw(double speed){
     claw1.set(speed * speedModifier);
     claw2.set(speed * speedModifier);
+    SmartDashboard.putNumber("Claw Speed", speed);
+    
   }
 }
