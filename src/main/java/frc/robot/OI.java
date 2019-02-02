@@ -57,8 +57,11 @@ public class OI {
 
     Button b2 = new JoystickButton(xBoxControl, 5);
     b2.whenPressed(new SetSpeed(false));
+    b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
     aButton.whenPressed(new MoveClaw());
     aButton.whenReleased(new ClawReverse());
+    aButton.close();
+    
   }
 }
