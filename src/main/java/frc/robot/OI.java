@@ -57,7 +57,7 @@ public class OI {
     Button b2 = new JoystickButton(xBoxControl, 5);
     b2.whenPressed(new SetSpeed(false));
     Button aButton = new JoystickButton(xBoxControl, 1);
-    aButton.whenPressed(new MoveClaw(1.0));
-    aButton.whenReleased(new MoveClaw(0.0));
+    //aButton.whenPressed();
+    //aButton.whenReleased();
   }
 }
