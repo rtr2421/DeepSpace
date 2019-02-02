@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -40,7 +41,7 @@ public class DriveTrain extends Subsystem {
     diffDrive = new DifferentialDrive(leftGroup, rightGroup);
   }
 
-  public static void drive(double leftSpeed, double rightSpeed) {
+  public void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed, rightSpeed);
   }
 
@@ -49,9 +50,14 @@ public class DriveTrain extends Subsystem {
     // Set the default command for a subsystem here.
     setDefaultCommand(new JoystickDrive());
   }
-  public void getGyroAngle() {
-    SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
-    SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
-    SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
+
+  public double getGyroX() {
+    return imu.getAngleX();
+  }
+  public double getGyroY() {
+    return imu.getAngleY();
+  }
+  public double getGyroZ() {
+    return imu.getAngleZ();
   }
 }

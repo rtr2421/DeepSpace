@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics m_pneumatics;
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
-  //public static ADIS16448_IMU imu;
+  //public static final ADIS16448_IMU imu = new ADIS16448_IMU(); ;
   
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -43,9 +43,7 @@ public class Robot extends TimedRobot {
    * 
    */
   @Override
-  public void robotInit() {
-    //imu = new ADIS16448_IMU();  
-    m_oi = new OI();
+  public void robotInit() { 
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     m_pneumatics = new Pneumatics();
     m_driveTrain = new DriveTrain();
@@ -53,7 +51,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
-    
+    m_oi = new OI();
   }
 
   /**
@@ -66,7 +64,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    m_driveTrain.getGyroAngle();
+    SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
+    SmartDashboard.putNumber("Gyro-Y", m_driveTrain.getGyroY());
+    SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
     /*
     SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
     SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());

@@ -7,10 +7,13 @@
 
 package frc.robot;
 
+import java.awt.event.KeyListener;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,5 +52,7 @@ public class OI {
 
   public OI() {
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
+   Button button = new JoystickButton(xBoxControl, 2);
+   button.whenPressed(new TurnDegrees(10));
   }
 }
