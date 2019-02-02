@@ -8,32 +8,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.CameraI2c;
 
-public class MoveClaw extends Command {
-  public MoveClaw() {
+public class updateAngleToTarget extends Command {
+  public updateAngleToTarget() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.claw);
+    // eg. requires(chassis);
+    requires(Robot.camera);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Claw.moveClaw(-1);
-    SmartDashboard.putBoolean("Claw Forward", true);
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    CameraI2c.updateAngle();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

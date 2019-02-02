@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ArmToNextPosition;
+import frc.robot.commands.ClawReverse;
 import frc.robot.commands.MoveClaw;
 import frc.robot.commands.SetSpeed;
 
@@ -56,8 +58,10 @@ public class OI {
 
     Button b2 = new JoystickButton(xBoxControl, 5);
     b2.whenPressed(new SetSpeed(false));
+    b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
-    //aButton.whenPressed();
-    //aButton.whenReleased();
+    aButton.whenPressed(new ArmToNextPosition());
+    aButton.close();
+    
   }
 }

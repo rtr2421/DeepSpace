@@ -19,6 +19,10 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.GetDistance;
 import frc.robot.commands.PneumaticsDrive;
 import frc.robot.commands.Teleop;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ArmLimitSwitch;
+import frc.robot.subsystems.BaseLimitSwitch;
+import frc.robot.subsystems.CameraI2c;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -45,7 +49,10 @@ public class Robot extends TimedRobot {
   public static SerialDistance m_serialPort;
   public static UltraSonic m_ultraSonic;
   public static Claw claw;
-
+  public static CameraI2c camera;
+  public static Arm arm;
+  public static ArmLimitSwitch m_limitSwitch;
+  public static BaseLimitSwitch m_baseSwitch;
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -56,6 +63,10 @@ public class Robot extends TimedRobot {
     com.setClosedLoopControl(true);
     com.start();
     claw = new Claw();
+    arm = new Arm();
+    m_baseSwitch = new BaseLimitSwitch();
+    m_limitSwitch = new ArmLimitSwitch();
+    camera = new CameraI2c();
     m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     m_pneumatics = new pneumatics();
@@ -66,6 +77,7 @@ public class Robot extends TimedRobot {
    // m_serialPort = new SerialDistance();
    // m_ultraSonic = new UltraSonic();
     Scheduler.getInstance().add(new GetDistance());
+    //OI must be init last
     m_oi = new OI();
   }
 
