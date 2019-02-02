@@ -18,6 +18,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics m_pneumatics;
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
+  //public static ADIS16448_IMU imu;
   
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    //imu = new ADIS16448_IMU();  
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     m_pneumatics = new Pneumatics();
@@ -63,6 +66,23 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    m_driveTrain.getGyroAngle();
+    /*
+    SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
+    SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
+    SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
+    
+    SmartDashboard.putNumber("Accel-X", imu.getAccelX());
+    SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
+    SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
+    
+    SmartDashboard.putNumber("Pitch", imu.getPitch());
+    SmartDashboard.putNumber("Roll", imu.getRoll());
+    SmartDashboard.putNumber("Yaw", imu.getYaw());
+    
+    SmartDashboard.putNumber("Pressure: ", imu.getBarometricPressure());
+    SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
+    */
   }
 
   /**

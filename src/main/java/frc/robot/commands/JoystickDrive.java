@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
@@ -28,6 +29,7 @@ public class JoystickDrive extends Command {
   @Override
   protected void execute() {
     DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
+    // SmartDashboard.putNumber("Gryo-X: ", Robot.m_driveTrain.getGyroX());
   }
 
   // Make this return true when this Command no longer needs to run execute()

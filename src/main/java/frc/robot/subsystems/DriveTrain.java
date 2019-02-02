@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.JoystickDrive;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 
 /**
  * Add your docs here.
@@ -19,6 +21,8 @@ import frc.robot.commands.JoystickDrive;
 public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  public static final ADIS16448_IMU imu = new ADIS16448_IMU();
+
   public Spark sparkL1 = new Spark(0);
   public Spark sparkL2 = new Spark(1);
   public Spark sparkR1 = new Spark(2);
@@ -44,5 +48,10 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new JoystickDrive());
+  }
+  public void getGyroAngle() {
+    SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
+    SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
+    SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
   }
 }
