@@ -22,7 +22,7 @@ import frc.robot.commands.Teleop;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.pneumatics;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import frc.robot.subsystems.SerialDistance;
 import frc.robot.subsystems.UltraSonic;
@@ -36,7 +36,7 @@ import frc.robot.subsystems.UltraSonic;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static Pneumatics m_pneumatics;
+  public static pneumatics m_pneumatics;
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
   //public static final ADIS16448_IMU imu = new ADIS16448_IMU(); ;
@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     claw = new Claw();
     m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    m_pneumatics = new Pneumatics();
+    m_pneumatics = new pneumatics();
     SmartDashboard.putData("Auto mode", m_chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);

@@ -15,12 +15,12 @@ import frc.robot.commands.PneumaticsDrive;
 /**
  * Add your docs here.
  */
-public class Pneumatics extends Subsystem {
+public class pneumatics extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static Compressor compressor = new Compressor(0);
   public static DoubleSolenoid doubleSol = new DoubleSolenoid(0, 1);
-  public Pneumatics(){
+  public pneumatics(){
     System.out.println("Compressor Init");
     compressor = new Compressor(0);
     compressor.setClosedLoopControl(true);

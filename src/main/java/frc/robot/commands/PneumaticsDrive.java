@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.pneumatics;
 
 public class PneumaticsDrive extends Command {
   public PneumaticsDrive() {
@@ -29,10 +29,10 @@ public class PneumaticsDrive extends Command {
   @Override
   protected void execute() {
     if(OI.xBoxControl.getTriggerAxis(Hand.kLeft)>0) {
-      Pneumatics.retract();
+      pneumatics.retract();
     }
     if(OI.xBoxControl.getTriggerAxis(Hand.kRight)>0) {
-      Pneumatics.extend();
+      pneumatics.extend();
     }
     
   }
