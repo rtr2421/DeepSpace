@@ -41,6 +41,7 @@ public class DriveTrain extends Subsystem {
     diffDrive = new DifferentialDrive(leftGroup, rightGroup);
   }
 
+  //maybe change back to static (broken code?)
   public void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed, rightSpeed);
   }
