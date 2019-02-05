@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.JoystickDrive;
 import com.analog.adis16448.frc.ADIS16448_IMU;
@@ -41,11 +42,15 @@ public class DriveTrain extends Subsystem {
     rightGroup = new SpeedControllerGroup(sparkR1, sparkR2);
 
     diffDrive = new DifferentialDrive(leftGroup, rightGroup);
+
   }
 
   //maybe change back to static (broken code?)
   public static void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
+    Shuffleboard.selectTab("Live Window");
+    Shuffleboard.update();
+    SmartDashboard.putNumber("SpeedModifier", speedModifier);
   }
   
 

@@ -12,8 +12,10 @@ import java.awt.event.KeyListener;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.*;
+
 import frc.robot.commands.MoveClaw;
 import frc.robot.commands.SetSpeed;
 
@@ -62,6 +64,8 @@ public class OI {
 
     Button b2 = new JoystickButton(xBoxControl, 5);
     b2.whenPressed(new SetSpeed(false));
+    b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
+
   }
 }

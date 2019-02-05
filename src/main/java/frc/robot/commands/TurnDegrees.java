@@ -21,11 +21,13 @@ public class TurnDegrees extends Command {
     // eg. requires(chassis);
     requires(Robot.m_driveTrain);
     this.target = target;
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
     turnAngle = Robot.m_driveTrain.getGyroZ() + target;
     isLeft = target<0;
   }
@@ -45,6 +47,7 @@ public class TurnDegrees extends Command {
     }
       
     DriveTrain.drive(leftSpeed, rightSpeed);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -58,7 +61,6 @@ public class TurnDegrees extends Command {
       if(Robot.m_driveTrain.getGyroZ() >= turnAngle)
         return true;
     }
-    return false;
   }
 
   // Called once after isFinished returns true
