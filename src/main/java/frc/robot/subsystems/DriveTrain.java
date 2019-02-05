@@ -42,7 +42,7 @@ public class DriveTrain extends Subsystem {
   }
 
   //maybe change back to static (broken code?)
-  public void drive(double leftSpeed, double rightSpeed) {
+  public static void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed, rightSpeed);
   }
 

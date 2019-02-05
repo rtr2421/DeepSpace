@@ -28,7 +28,7 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_driveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
+    DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
     // SmartDashboard.putNumber("Gryo-X: ", Robot.m_driveTrain.getGyroX());
   }
 

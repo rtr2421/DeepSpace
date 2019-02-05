@@ -44,7 +44,7 @@ public class TurnDegrees extends Command {
       rightSpeed = -.5;
     }
       
-    Robot.m_driveTrain.drive(leftSpeed, rightSpeed);
+    DriveTrain.drive(leftSpeed, rightSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
