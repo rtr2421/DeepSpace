@@ -61,6 +61,7 @@ public class TurnDegrees extends Command {
       if(Robot.m_driveTrain.getGyroZ() >= turnAngle)
         return true;
     }
+    return false;
   }
 
   // Called once after isFinished returns true
