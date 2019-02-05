@@ -24,6 +24,8 @@ public class DriveTrain extends Subsystem {
   // here. Call these from Commands.
   public static final ADIS16448_IMU imu = new ADIS16448_IMU();
 
+  public static boolean fast;
+  private static Double speedModifier = 1.0;
   public Spark sparkL1 = new Spark(0);
   public Spark sparkL2 = new Spark(1);
   public Spark sparkR1 = new Spark(2);
@@ -43,8 +45,11 @@ public class DriveTrain extends Subsystem {
 
   //maybe change back to static (broken code?)
   public static void drive(double leftSpeed, double rightSpeed) {
-    diffDrive.arcadeDrive(leftSpeed, rightSpeed);
+    diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
   }
+  
+
+  
 
   @Override
   public void initDefaultCommand() {
@@ -60,5 +65,11 @@ public class DriveTrain extends Subsystem {
   }
   public double getGyroZ() {
     return imu.getAngleZ();
+  }
+  public void setFast(){
+    speedModifier = 1.0;
+  }
+  public void setSlow(){
+    speedModifier = 0.5;
   }
 }

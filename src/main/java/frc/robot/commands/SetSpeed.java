@@ -7,37 +7,39 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class SetSpeed extends Command {
+  Boolean fast;
+  public SetSpeed(boolean fast) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_driveTrain);
+    this.fast = fast;
+    
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    if(fast){
+      Robot.m_driveTrain.setFast();
+    }else {
+      Robot.m_driveTrain.setSlow();
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
-    // SmartDashboard.putNumber("Gryo-X: ", Robot.m_driveTrain.getGyroX());
+
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

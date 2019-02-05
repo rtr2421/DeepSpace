@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.*;
+import frc.robot.commands.MoveClaw;
+import frc.robot.commands.SetSpeed;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -54,5 +56,12 @@ public class OI {
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
    Button button = new JoystickButton(xBoxControl, 2);
    button.whenPressed(new TurnDegrees(10));
+    Button b1 = new JoystickButton(xBoxControl, 6);
+    b1.whenPressed(new SetSpeed(true));
+    //b1.whenReleased(new SetSpeed(false));
+
+    Button b2 = new JoystickButton(xBoxControl, 5);
+    b2.whenPressed(new SetSpeed(false));
+    Button aButton = new JoystickButton(xBoxControl, 1);
   }
 }

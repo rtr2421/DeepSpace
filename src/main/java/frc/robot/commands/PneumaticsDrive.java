@@ -28,7 +28,6 @@ public class PneumaticsDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //System.out.println("exec");
     if(OI.xBoxControl.getTriggerAxis(Hand.kLeft)>0) {
       Pneumatics.retract();
     }
