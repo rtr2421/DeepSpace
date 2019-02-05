@@ -7,11 +7,15 @@
 
 package frc.robot;
 
+import java.awt.event.KeyListener;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ArmToNextPosition;
-import frc.robot.commands.ClawReverse;
+
+import edu.wpi.first.wpilibj.buttons.Trigger;
+import frc.robot.commands.*;
+
 import frc.robot.commands.MoveClaw;
 import frc.robot.commands.SetSpeed;
 
@@ -52,6 +56,8 @@ public class OI {
 
   public OI() {
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
+   Button button = new JoystickButton(xBoxControl, 2);
+   button.whenPressed(new TurnDegrees(10));
     Button b1 = new JoystickButton(xBoxControl, 6);
     b1.whenPressed(new SetSpeed(true));
     //b1.whenReleased(new SetSpeed(false));
@@ -60,8 +66,6 @@ public class OI {
     b2.whenPressed(new SetSpeed(false));
     b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
-    aButton.whenPressed(new ArmToNextPosition());
-    aButton.close();
-    
+
   }
 }

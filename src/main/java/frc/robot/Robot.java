@@ -27,6 +27,7 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.pneumatics;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import frc.robot.subsystems.SerialDistance;
 import frc.robot.subsystems.UltraSonic;
 
@@ -42,6 +43,8 @@ public class Robot extends TimedRobot {
   public static pneumatics m_pneumatics;
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
+  //public static final ADIS16448_IMU imu = new ADIS16448_IMU(); ;
+  
   public static Teleop m_teleop;
   Command m_autonomousCommand;
   Compressor com = new Compressor(0);
@@ -91,7 +94,25 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
+    SmartDashboard.putNumber("Gyro-Y", m_driveTrain.getGyroY());
+    SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
+    /*
+    SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
+    SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
+    SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
     
+    SmartDashboard.putNumber("Accel-X", imu.getAccelX());
+    SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
+    SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
+    
+    SmartDashboard.putNumber("Pitch", imu.getPitch());
+    SmartDashboard.putNumber("Roll", imu.getRoll());
+    SmartDashboard.putNumber("Yaw", imu.getYaw());
+    
+    SmartDashboard.putNumber("Pressure: ", imu.getBarometricPressure());
+    SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
+    */
   }
   @Override
   public void disabledInit() {

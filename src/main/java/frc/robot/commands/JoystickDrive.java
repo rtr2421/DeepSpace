@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
@@ -28,11 +29,8 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //if(OI.xBoxControl.getBumperPressed(Hand.kRight)){
-      DriveTrain.drive(OI.xBoxControl.getY(),OI.xBoxControl.getX());
-   // }else{
-     // DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
-   // }
+    DriveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
+    // SmartDashboard.putNumber("Gryo-X: ", Robot.m_driveTrain.getGyroX());
   }
   
 
