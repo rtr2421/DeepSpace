@@ -52,15 +52,19 @@ public class TurnDegrees extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(isLeft) {
-      if(Robot.m_driveTrain.getGyroZ() <= turnAngle)
-        return true;
-    }
+    if(target == 0)
+      return true;
     else {
-      if(Robot.m_driveTrain.getGyroZ() >= turnAngle)
-        return true;
+      if(isLeft) {
+        if(Robot.m_driveTrain.getGyroZ() <= turnAngle)
+          return true;
+      }
+      else {
+        if(Robot.m_driveTrain.getGyroZ() >= turnAngle)
+          return true;
+      }
+      return false;
     }
-    return false;
   }
 
   // Called once after isFinished returns true
