@@ -27,13 +27,13 @@ public class CameraI2c extends Subsystem {
     // Set the default command for a subsystem here.
      setDefaultCommand(new updateAngleToTarget());
   }
-  public static void updateAngle(){
+  public void updateAngle(){
     if(true){
       read();
       SmartDashboard.putNumber("Angle to target", angle);
     }
   }
-  public static int read(){
+  public int read(){
     String received = "";
     char[] ch = new char[20];
     byte[] toSend = new byte[1];

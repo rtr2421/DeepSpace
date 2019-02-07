@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.GuideToTarget;
 import frc.robot.commands.JoystickDrive;
 import com.analog.adis16448.frc.*;
 
@@ -56,7 +57,7 @@ public class DriveTrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new JoystickDrive());
+    setDefaultCommand(new GuideToTarget());
   }
   public void setFast(){
     speedModifier = 1.0;

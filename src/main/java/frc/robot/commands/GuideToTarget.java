@@ -9,47 +9,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.ArmLimitSwitch;
-import frc.robot.subsystems.BaseLimitSwitch;
+import frc.robot.subsystems.CameraI2c;
 
-public class ArmToNextPosition extends Command {
-  boolean startRaised = false;
-  static final double	speed = 1;
-  public ArmToNextPosition() {
+public class GuideToTarget extends Command {
+  public GuideToTarget() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_baseSwitch);
-    requires(Robot.m_limitSwitch);
+     requires(Robot.m_driveTrain);
+     requires(Robot.camera);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    startRaised = ArmLimitSwitch.getState();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(startRaised){
-      Arm.raise(speed);
-    }else if(!startRaised){
-        Arm.raise(-speed);
-    }
+    Robot.camera.updateAngle();
+    TurnDegrees turn = new TurnDegrees(CameraI2c.angle);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(startRaised){
-      if(BaseLimitSwitch.getState()){
-        return true;
-      }
-    }else{
-      if(ArmLimitSwitch.getState()){
-        return true;
-      }
-    }
     return false;
   }
 

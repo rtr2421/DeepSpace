@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
   public static UltraSonic m_ultraSonic;
   public static Claw claw;
   public static CameraI2c camera;
-  public static Arm arm;
+  //public static Arm arm;
   public static ArmLimitSwitch m_limitSwitch;
   public static BaseLimitSwitch m_baseSwitch;
   /**
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
     com.setClosedLoopControl(true);
     com.start();
     claw = new Claw();
-    arm = new Arm();
+    //arm = new Arm();
     m_baseSwitch = new BaseLimitSwitch();
     m_limitSwitch = new ArmLimitSwitch();
     camera = new CameraI2c();

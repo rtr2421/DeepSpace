@@ -12,11 +12,11 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
 public class TurnDegrees extends Command {
-  public double target;
-  public double turnAngle;
+  public int target;
+  public int turnAngle;
   public boolean isLeft;
 
-  public TurnDegrees(double target) {
+  public TurnDegrees(int target) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_driveTrain);
@@ -26,22 +26,22 @@ public class TurnDegrees extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    turnAngle = Robot.m_driveTrain.getGyroZ() + target;
+    turnAngle = (int) Robot.m_driveTrain.getGyroZ() + target;
     isLeft = target<0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftSpeed = 0;
-    double rightSpeed = 0;
+    int leftSpeed = 0;
+    int rightSpeed = 0;
     if(isLeft) {
-      leftSpeed = -.5;
-      rightSpeed = .5;
+      leftSpeed = -1;
+      rightSpeed = 1;
     }
     else {
-      leftSpeed = .5;
-      rightSpeed = -.5;
+      leftSpeed = 1;
+      rightSpeed = -1;
     }
       
     DriveTrain.drive(leftSpeed, rightSpeed);
