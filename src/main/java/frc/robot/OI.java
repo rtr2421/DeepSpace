@@ -12,17 +12,14 @@ import java.awt.event.KeyListener;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.*;
 import frc.robot.commands.ArmToNextPosition;
 import frc.robot.commands.ClawReverse;
-=======
 
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.*;
 
->>>>>>> e1d8ed795ab1fb08dc431a63c18e89745f1fa786
 import frc.robot.commands.MoveClaw;
 import frc.robot.commands.SetSpeed;
 
@@ -73,12 +70,5 @@ public class OI {
     b2.whenPressed(new SetSpeed(false));
     b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
-<<<<<<< HEAD
-    aButton.whenPressed(new ArmToNextPosition());
-    aButton.close();
-    
-=======
-
->>>>>>> e1d8ed795ab1fb08dc431a63c18e89745f1fa786
   }
 }
