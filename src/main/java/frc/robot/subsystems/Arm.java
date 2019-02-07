@@ -17,10 +17,12 @@ import frc.robot.commands.ArmToNextPosition;
  * Add your docs here.
  */
 public class Arm extends Subsystem {
-  static Spark motor = new Spark(RobotMap.arm);
+  static Spark motor;
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
+  public Arm() {
+    motor = new Spark(7);
+  }
   @Override
   public void initDefaultCommand() {
   }

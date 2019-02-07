@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
   SpeedControllerGroup leftGroup;
   SpeedControllerGroup rightGroup;
 
-  public static DifferentialDrive diffDrive;
+  public DifferentialDrive diffDrive;
 
   public DriveTrain() {
     leftGroup = new SpeedControllerGroup(sparkL1, sparkL2);
@@ -44,7 +44,12 @@ public class DriveTrain extends Subsystem {
 
   }
 
+<<<<<<< HEAD
   public static void drive(double leftSpeed, double rightSpeed) {
+=======
+  //maybe change back to static (broken code?)
+  public void drive(double leftSpeed, double rightSpeed) {
+>>>>>>> e1d8ed795ab1fb08dc431a63c18e89745f1fa786
     diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
     Shuffleboard.selectTab("Live Window");
     Shuffleboard.update();

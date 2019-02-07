@@ -13,7 +13,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class TurnDegrees extends Command {
   public int target;
-  public int turnAngle;
+  public double turnAngle;
   public boolean isLeft;
 
   public TurnDegrees(int target) {
@@ -26,15 +26,15 @@ public class TurnDegrees extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    turnAngle = (int) Robot.m_driveTrain.getGyroZ() + target;
+    turnAngle = Robot.m_driveTrain.getGyroZ() + target;
     isLeft = target<0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    int leftSpeed = 0;
-    int rightSpeed = 0;
+    double leftSpeed = 0;
+    double rightSpeed = 0;
     if(isLeft) {
       leftSpeed = -1;
       rightSpeed = 1;
@@ -44,21 +44,26 @@ public class TurnDegrees extends Command {
       rightSpeed = -1;
     }
       
-    DriveTrain.drive(leftSpeed, rightSpeed);
+    Robot.m_driveTrain.drive(leftSpeed, rightSpeed);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(isLeft) {
-      if(Robot.m_driveTrain.getGyroZ() <= turnAngle)
-        return true;
-    }
+    if(target == 0)
+      return true;
     else {
-      if(Robot.m_driveTrain.getGyroZ() >= turnAngle)
-        return true;
+      if(isLeft) {
+        if(Robot.m_driveTrain.getGyroZ() <= turnAngle)
+          return true;
+      }
+      else {
+        if(Robot.m_driveTrain.getGyroZ() >= turnAngle)
+          return true;
+      }
+      return false;
     }
-    return false;
   }
 
   // Called once after isFinished returns true
