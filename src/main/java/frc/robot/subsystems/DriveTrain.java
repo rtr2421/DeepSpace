@@ -7,14 +7,14 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.JoystickDrive;
-import com.analog.adis16448.frc.ADIS16448_IMU;
+import com.analog.adis16448.frc.*;
 
 /**
  * Add your docs here.
@@ -23,7 +23,6 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static final ADIS16448_IMU imu = new ADIS16448_IMU();
-
   public static boolean fast;
   private static Double speedModifier = 1.0;
   public Spark sparkL1 = new Spark(0);
@@ -41,11 +40,14 @@ public class DriveTrain extends Subsystem {
     rightGroup = new SpeedControllerGroup(sparkR1, sparkR2);
 
     diffDrive = new DifferentialDrive(leftGroup, rightGroup);
+
   }
 
-  //maybe change back to static (broken code?)
   public static void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
+    Shuffleboard.selectTab("Live Window");
+    Shuffleboard.update();
+    SmartDashboard.putNumber("SpeedModifier", speedModifier);
   }
   
 
@@ -56,20 +58,21 @@ public class DriveTrain extends Subsystem {
     // Set the default command for a subsystem here.
     setDefaultCommand(new JoystickDrive());
   }
-
-  public double getGyroX() {
-    return imu.getAngleX();
-  }
-  public double getGyroY() {
-    return imu.getAngleY();
-  }
-  public double getGyroZ() {
-    return imu.getAngleZ();
-  }
   public void setFast(){
     speedModifier = 1.0;
   }
   public void setSlow(){
     speedModifier = 0.5;
   }
+  public double getGyroX(){
+    return imu.getAngleX();
+  }
+  public double getGyroY(){
+    return imu.getAngleY();
+  }
+  public double getGyroZ(){
+    return imu.getAngleZ();
+  }
+
+  
 }

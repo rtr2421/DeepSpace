@@ -7,30 +7,24 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.MoveClaw;
 
 /**
  * Add your docs here.
  */
-public class Claw extends Subsystem {
+public class ArmLimitSwitch extends Subsystem {
+  public static boolean state;
+  static DigitalInput Switch = new DigitalInput(3);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  static double speedModifier = 1.0;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new MoveClaw());
+    // setDefaultCommand(new MySpecialCommand());
   }
-  static Spark claw1 = new Spark(4);
-  static Spark claw2 = new Spark(5);
-  public static void moveClaw(double speed){
-    claw1.set(speed * speedModifier);
-    claw2.set(speed * speedModifier);
-    SmartDashboard.putNumber("Claw Speed", speed);
-    
+  public static boolean getState(){
+    return Switch.get();
   }
 }
