@@ -27,7 +27,7 @@ public class updateAngleToTarget extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   Robot.camera.updateAngle();
+   CameraI2c.read();
   }
 
   // Make this return true when this Command no longer needs to run execute()

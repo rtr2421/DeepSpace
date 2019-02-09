@@ -17,11 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.GetDistance;
-import frc.robot.commands.PneumaticsDrive;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.ArmLimitSwitch;
-import frc.robot.subsystems.BaseLimitSwitch;
 import frc.robot.subsystems.CameraI2c;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
@@ -44,6 +41,11 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
   //public static final ADIS16448_IMU imu = new ADIS16448_IMU(); ;
+/**
+ *
+ */
+
+  //private static final boolean PUT_NUMBER = SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
   
   public static Teleop m_teleop;
   Command m_autonomousCommand;
@@ -53,9 +55,7 @@ public class Robot extends TimedRobot {
   public static UltraSonic m_ultraSonic;
   public static Claw claw;
   public static CameraI2c camera;
-  //public static Arm arm;
-  public static ArmLimitSwitch m_limitSwitch;
-  public static BaseLimitSwitch m_baseSwitch;
+  public static Arm arm;
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -66,9 +66,7 @@ public class Robot extends TimedRobot {
     com.setClosedLoopControl(true);
     com.start();
     claw = new Claw();
-    //arm = new Arm();
-    m_baseSwitch = new BaseLimitSwitch();
-    m_limitSwitch = new ArmLimitSwitch();
+    arm = new Arm();
     camera = new CameraI2c();
     m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -94,9 +92,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    //CameraI2c.read();
+    /*
     SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
     SmartDashboard.putNumber("Gyro-Y", m_driveTrain.getGyroY());
     SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
+    */
+
     /*
     SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
     SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
@@ -180,6 +182,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    CameraI2c.read();
     Scheduler.getInstance().run();
   }
 

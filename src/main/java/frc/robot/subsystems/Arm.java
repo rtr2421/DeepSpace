@@ -7,28 +7,40 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArmToNextPosition;
+import frc.robot.commands.MoveArm;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * Add your docs here.
  */
 public class Arm extends Subsystem {
-  static Spark motor;
+  SpeedController motor;
+  Encoder armEncoder;
+  DigitalInput enc;
+  
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Arm() {
-    motor = new Spark(7);
+    armEncoder = new Encoder(2,3);
+    motor = new WPI_TalonSRX(1);
   }
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new MoveArm());
   }
-  public static void raise(Double speed){
-    if(ArmLimitSwitch.getState()){
-      motor.set(speed);
-    }
+  public void move(Double speed){
+    motor.set(speed);
+  }
+  public double getRotations(){
+    return armEncoder.getDistance();
   }
 }

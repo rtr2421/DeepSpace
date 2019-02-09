@@ -25,15 +25,12 @@ public class CameraI2c extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new updateAngleToTarget());
+    // setDefaultCommand(new updateAngleToTarget());
   }
-  public void updateAngle(){
-    if(true){
-      read();
-      SmartDashboard.putNumber("Angle to target", angle);
-    }
+  public static int getAngle(){
+      return angle;
   }
-  public int read(){
+  public static int read(){
     String received = "";
     char[] ch = new char[20];
     byte[] toSend = new byte[1];
@@ -48,6 +45,7 @@ public class CameraI2c extends Subsystem {
     if(!received.isBlank()){
       angle = Integer.parseInt(received);
     }
+    SmartDashboard.putNumber("Angle to target", angle);
     return angle;
   }
 }

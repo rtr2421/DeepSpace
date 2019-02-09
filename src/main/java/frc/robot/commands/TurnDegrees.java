@@ -8,62 +8,88 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.subsystems.CameraI2c;
 import frc.robot.subsystems.DriveTrain;
 
 public class TurnDegrees extends Command {
-  public int target;
+  boolean finished = false;
+  public double target;
   public double turnAngle;
   public boolean isLeft;
-
-  public TurnDegrees(int target) {
+  double leftSpeed = 0;
+  double rightSpeed = 0;
+  public TurnDegrees() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_driveTrain);
-    this.target = target;
+    
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    turnAngle = Robot.m_driveTrain.getGyroZ() + target;
+    this.target = CameraI2c.read();
+    SmartDashboard.putNumber("Target", target);
     isLeft = target<0;
+    SmartDashboard.putBoolean("IsLeft", isLeft);
+    if(isLeft){
+      turnAngle = Robot.m_driveTrain.getGyroZ() - Math.abs(target);
+    }else{
+      turnAngle = Robot.m_driveTrain.getGyroZ() + Math.abs(target);
+    }
+    SmartDashboard.putNumber("Gyro angle of target", turnAngle);
+    SmartDashboard.putNumber("Angle to target", target);
+    
+    if(isLeft) {
+      leftSpeed = -.5;
+      rightSpeed = .5;
+    }
+    else {
+      leftSpeed = .5;
+      rightSpeed = -.5;
+    }
+      
+   
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftSpeed = 0;
-    double rightSpeed = 0;
-    if(isLeft) {
-      leftSpeed = -1;
-      rightSpeed = 1;
-    }
-    else {
-      leftSpeed = 1;
-      rightSpeed = -1;
-    }
-      
-    Robot.m_driveTrain.drive(leftSpeed, rightSpeed);
+    Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    Double gyroZ = Robot.m_driveTrain.getGyroZ();
     if(target == 0)
-      return true;
+      finished = true;
     else {
       if(isLeft) {
-        if(Robot.m_driveTrain.getGyroZ() <= turnAngle)
-          return true;
+        if(gyroZ <= turnAngle + 6){
+          finished = true;  
+        }else{
+          finished = false;
+        }
       }
       else {
-        if(Robot.m_driveTrain.getGyroZ() >= turnAngle)
-          return true;
+        if(gyroZ >= turnAngle - 6){
+          
+          finished = true;
+        }else{
+          finished = false;
+        }
       }
-      return false;
     }
+    SmartDashboard.putNumber("GyroZ turnangle", gyroZ);
+    SmartDashboard.putNumber("TurnAngle",turnAngle);
+    SmartDashboard.putBoolean("Stopped", finished);
+    
+    return finished;
   }
 
   // Called once after isFinished returns true

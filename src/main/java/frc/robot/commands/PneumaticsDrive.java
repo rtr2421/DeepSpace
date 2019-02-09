@@ -28,10 +28,10 @@ public class PneumaticsDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.xBoxControl.getTriggerAxis(Hand.kLeft)>0) {
+    if(OI.xBoxControl.getBumperPressed(Hand.kLeft)) {
       pneumatics.retract();
     }
-    if(OI.xBoxControl.getTriggerAxis(Hand.kRight)>0) {
+    if(OI.xBoxControl.getBumperPressed(Hand.kRight)) {
       pneumatics.extend();
     }
     

@@ -41,24 +41,32 @@ public class DriveTrain extends Subsystem {
     rightGroup = new SpeedControllerGroup(sparkR1, sparkR2);
 
     diffDrive = new DifferentialDrive(leftGroup, rightGroup);
-
+    imu.reset();
+    imu.calibrate();
   }
 
   //maybe change back to static (broken code?)
   public void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
+    SmartDashboard.putNumber("Gyro-Z drive", imu.getAngleZ());
     Shuffleboard.selectTab("Live Window");
     Shuffleboard.update();
     SmartDashboard.putNumber("SpeedModifier", speedModifier);
+
+    
+  }
+  public void tankDrive(double leftSpeed, double rightSpeed){
+    diffDrive.tankDrive(leftSpeed, rightSpeed);
+    SmartDashboard.putNumber("Gyro-Z drive", imu.getAngleZ());
   }
   
 
   
 
   @Override
-  public void initDefaultCommand() {
+  public void initDefaultCommand() { 
     // Set the default command for a subsystem here.
-    setDefaultCommand(new GuideToTarget());
+    setDefaultCommand(new JoystickDrive());
   }
   public void setFast(){
     speedModifier = 1.0;
@@ -67,6 +75,7 @@ public class DriveTrain extends Subsystem {
     speedModifier = 0.5;
   }
   public double getGyroX(){
+    //SmartDashboard.putNumber("Imu Z axis", imu.getAngleZ());
     return imu.getAngleX();
   }
   public double getGyroY(){
