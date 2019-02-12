@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.GetDistance;
 import frc.robot.commands.Teleop;
+import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CameraI2c;
 import frc.robot.subsystems.Claw;
@@ -81,6 +82,7 @@ public class Robot extends TimedRobot {
    // m_ultraSonic = new UltraSonic();
     Scheduler.getInstance().add(new GetDistance());
     //OI must be init last
+    SmartDashboard.putNumber("Offset", TurnDegrees.offset);
     m_oi = new OI();
   }
 
@@ -101,7 +103,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Gyro-Y", m_driveTrain.getGyroY());
     SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
     */
-
+    TurnDegrees.offset = SmartDashboard.getNumber("Offset",  TurnDegrees.offset);
+    SmartDashboard.putNumber("Offset", TurnDegrees.offset);
     /*
     SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
     SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());

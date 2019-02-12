@@ -72,7 +72,7 @@ public class DriveTrain extends Subsystem {
     speedModifier = 1.0;
   }
   public void setSlow(){
-    speedModifier = 0.5;
+    speedModifier = 0.65;
   }
   public double getGyroX(){
     //SmartDashboard.putNumber("Imu Z axis", imu.getAngleZ());

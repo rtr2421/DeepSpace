@@ -17,21 +17,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.MoveArm;
+
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * Add your docs here.
  */
 public class Arm extends Subsystem {
-  SpeedController motor;
+  WPI_TalonSRX motor;
   Encoder armEncoder;
   DigitalInput enc;
+  double armModifier = .1;
   
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Arm() {
     armEncoder = new Encoder(2,3);
-    motor = new WPI_TalonSRX(1);
+    motor = new WPI_TalonSRX(3);
   }
   @Override
   public void initDefaultCommand() {

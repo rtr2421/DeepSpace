@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.CameraI2c;
@@ -15,6 +16,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class TurnDegrees extends Command {
   boolean finished = false;
+  public static double offset = 6;
   public double target;
   public double turnAngle;
   public boolean isLeft;
@@ -59,7 +61,8 @@ public class TurnDegrees extends Command {
   @Override
   protected void execute() {
     Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-
+    SmartDashboard.putNumber("Offset", offset);
+    SmartDashboard.getNumber("Offset", offset);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -70,14 +73,14 @@ public class TurnDegrees extends Command {
       finished = true;
     else {
       if(isLeft) {
-        if(gyroZ <= turnAngle + 6){
+        if(gyroZ <= turnAngle + offset){
           finished = true;  
         }else{
           finished = false;
         }
       }
       else {
-        if(gyroZ >= turnAngle - 6){
+        if(gyroZ >= turnAngle - offset){
           
           finished = true;
         }else{
