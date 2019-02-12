@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.GetDistance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -19,7 +20,7 @@ public class SerialDistance extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  //SerialPort sensor = new SerialPort(9600, SerialPort.Port.kOnboard, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
+  SerialPort sensor = new SerialPort(9600, SerialPort.Port.kOnboard, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -28,7 +29,8 @@ public class SerialDistance extends Subsystem {
 
   public String getString()
   {
-   // return sensor.readString();
-   return "";
+    SmartDashboard.putString("SerialDistance String", sensor.readString());
+    return sensor.readString();
+   //return "";
   }
 }

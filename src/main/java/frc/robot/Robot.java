@@ -75,7 +75,9 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     Scheduler.getInstance().add(new Teleop());
-   // m_serialPort = new SerialDistance();
+
+    m_serialPort = new SerialDistance(); //TESTING***************************************
+
    // m_ultraSonic = new UltraSonic();
     Scheduler.getInstance().add(new GetDistance());
     //OI must be init last
@@ -92,6 +94,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    m_serialPort.getString();
     //CameraI2c.read();
     /*
     SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
