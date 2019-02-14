@@ -57,6 +57,8 @@ public class Robot extends TimedRobot {
   public static Claw claw;
   public static CameraI2c camera;
   public static Arm arm;
+  
+  public static SerialDistance m_serialDistance;
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -79,8 +81,8 @@ public class Robot extends TimedRobot {
 
     m_serialPort = new SerialDistance(); //TESTING***************************************
 
-   // m_ultraSonic = new UltraSonic();
-    Scheduler.getInstance().add(new GetDistance());
+    //m_ultraSonic = new UltraSonic();
+    //Scheduler.getInstance().add(new GetDistance());
     //OI must be init last
     SmartDashboard.putNumber("Offset", TurnDegrees.offset);
     m_oi = new OI();
@@ -96,13 +98,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    m_serialPort.getString();
+    //m_serialPort.getString();  //REMOVE LATER LSKJDFLKSDFLJAFHSDGJOEWJ9248&(*#@!^%(*!@&$(*@&$37)))
     //CameraI2c.read();
     /*
     SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
     SmartDashboard.putNumber("Gyro-Y", m_driveTrain.getGyroY());
     SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
     */
+    /*
     TurnDegrees.offset = SmartDashboard.getNumber("Offset",  TurnDegrees.offset);
     SmartDashboard.putNumber("Offset", TurnDegrees.offset);
     /*

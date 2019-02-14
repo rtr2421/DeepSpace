@@ -24,12 +24,11 @@ public class SerialDistance extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new GetDistance());
+    setDefaultCommand(new GetDistance());
   }
 
   public String getString()
   {
-    SmartDashboard.putString("SerialDistance String", sensor.readString());
     return sensor.readString();
    //return "";
   }
