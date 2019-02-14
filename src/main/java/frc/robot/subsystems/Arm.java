@@ -12,20 +12,21 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.MoveArm;
-
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * Add your docs here.
  */
 public class Arm extends Subsystem {
-  WPI_TalonSRX motor;
+  //WPI_TalonSRX motor;
+  Spark spark;
   Encoder armEncoder;
   DigitalInput enc;
   double armModifier = .1;
@@ -34,14 +35,18 @@ public class Arm extends Subsystem {
   // here. Call these from Commands.
   public Arm() {
     armEncoder = new Encoder(2,3);
-    motor = new WPI_TalonSRX(3);
+    //motor = new WPI_TalonSRX(3);
+    spark = new Spark(0);
   }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MoveArm());
   }
   public void move(Double speed){
-    motor.set(speed);
+    SmartDashboard.putNumber("Arm", speed);
+    spark.set((OI.xBoxControl.getTriggerAxis(Hand.kRight) -
+     OI.xBoxControl.getTriggerAxis(Hand.kLeft))*.5);
+    //motor.set(speed);
   }
   public double getRotations(){
     return armEncoder.getDistance();
