@@ -74,7 +74,5 @@ public class OI {
     b2.whenPressed(new SetSpeed(false));
     b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
-
-    SmartDashboard.putData("Get Distance", new GetDistance());
   }
 }

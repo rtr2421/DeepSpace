@@ -7,32 +7,40 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;             //TESTING)@9815831597438*@^$*&^@$*&@
+import java.awt.Color;
+import java.util.Map;
+
+import edu.wpi.first.wpilibj.Timer; //TESTING)@9815831597438*@^$*&^@$*&@
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.SerialDistance;
 
 public class GetDistance extends Command {
-
+  double distance;
+  boolean warning;
   public GetDistance() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_serialPort);
+    requires(Robot.m_ultraSonic);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //SmartDashboard.putString("asldjfdsSerialDistance String", Robot.m_serialPort.getString());
+    // Called repeatedly when this Command is scheduled to run
   }
-
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putString("SerialDistance String", Robot.m_serialPort.getString());//.replace("R", "") );
-    //distance = Robot.m_serialPort.getString();
-    //SmartDashboard.putString("distance", distance.replace("R",""));
+    //Color distanceColor = new Color((int)(Robot.m_ultraSonic.voltage()*51), 50, 100);
+    distance = Robot.m_ultraSonic.distance();
+    warning = false;
+    if(distance < 360) {
+      warning = true;
+    }
+    SmartDashboard.putBoolean("WARNING", warning);
+    SmartDashboard.putNumber("Ultrasonic Distance", distance);
   }
 
   // Make this return true when this Command no longer needs to run execute()
