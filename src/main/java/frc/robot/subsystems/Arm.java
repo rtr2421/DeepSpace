@@ -26,12 +26,15 @@ import frc.robot.commands.MoveArm;
  */
 public class Arm extends Subsystem {
   //WPI_TalonSRX motor;
+  private static final double leftMod = .95;
+  private static final double rightMod = 1;
   Spark spark;
   Encoder armEncoder;
   DigitalInput enc;
   double armModifier = .1;
   DigitalInput switchBottom;
   DigitalInput switchTop;
+  Spark sparkR;
   
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -39,15 +42,17 @@ public class Arm extends Subsystem {
     armEncoder = new Encoder(2,3);
     //motor = new WPI_TalonSRX(3);
     spark = new Spark(4);
+    sparkR = new Spark(6);
   }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MoveArm());
   }
   public void move(){
-    double speed = (-OI.xBoxControl.getTriggerAxis(Hand.kRight) + OI.xBoxControl.getTriggerAxis(Hand.kLeft))*.5;
+    double speed = (OI.xBoxControl.getTriggerAxis(Hand.kRight) - OI.xBoxControl.getTriggerAxis(Hand.kLeft))*1;
     SmartDashboard.putNumber("Arm", speed);
-    spark.setSpeed(speed);
+    spark.setSpeed(speed * leftMod);
+    //sparkR.setSpeed(speed * rightMod);
     //motor.set(speed);
   }
   public double getRotations(){

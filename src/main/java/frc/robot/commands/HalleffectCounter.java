@@ -7,32 +7,30 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;             //TESTING)@9815831597438*@^$*&^@$*&@
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.SerialDistance;
+import frc.robot.subsystems.Hallefect;
 
-public class GetDistance extends Command {
-
-  public GetDistance() {
+public class HalleffectCounter extends Command {
+  public HalleffectCounter() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_serialPort);
+    requires(Robot.m_hallEfect);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //SmartDashboard.putString("asldjfdsSerialDistance String", Robot.m_serialPort.getString());
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putString("SerialDistance String", Robot.m_serialPort.getString());//.replace("R", "") );
-    //distance = Robot.m_serialPort.getString();
-    //SmartDashboard.putString("distance", distance.replace("R",""));
+    if(Robot.m_hallEfect.getPulse()){
+      Hallefect.setCount(Hallefect.getCount()+1);
+    }
+    SmartDashboard.putNumber("Count", Hallefect.getCount());
   }
 
   // Make this return true when this Command no longer needs to run execute()

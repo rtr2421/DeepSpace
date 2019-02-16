@@ -17,8 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.commands.ClawReverse;
 
-import edu.wpi.first.wpilibj.buttons.Trigger;
-import frc.robot.commands.*;
 
 import frc.robot.commands.MoveClaw;
 import frc.robot.commands.SetSpeed;
@@ -60,7 +58,6 @@ public class OI {
   public static XboxController xBoxControl = new XboxController(0);
 
   public OI() {
-    int cameraRead = 0;
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
    Button button = new JoystickButton(xBoxControl, 2);
    button.whenPressed(new TurnDegrees());
@@ -74,7 +71,6 @@ public class OI {
     b2.whenPressed(new SetSpeed(false));
     b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
-
-    SmartDashboard.putData("Get Distance", new GetDistance());
+    aButton.whileHeld(new TeleMoveArm());
   }
 }

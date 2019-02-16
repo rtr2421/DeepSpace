@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.GetDistance;
 import frc.robot.commands.Teleop;
 import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.Arm;
@@ -24,9 +23,10 @@ import frc.robot.subsystems.CameraI2c;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Hallefect;
+import frc.robot.subsystems.TelescopingArm;
 import frc.robot.subsystems.pneumatics;
 import com.analog.adis16448.frc.ADIS16448_IMU;
-import frc.robot.subsystems.SerialDistance;
 import frc.robot.subsystems.UltraSonic;
 
 /**
@@ -52,13 +52,12 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   Compressor com = new Compressor(0);
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-  public static SerialDistance m_serialPort;
   public static UltraSonic m_ultraSonic;
   public static Claw claw;
   public static CameraI2c camera;
   public static Arm arm;
-  
-  public static SerialDistance m_serialDistance;
+  public static TelescopingArm m_teleArm;
+  public static Hallefect m_hallEfect;
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -78,8 +77,8 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     Scheduler.getInstance().add(new Teleop());
-
-    m_serialPort = new SerialDistance(); //TESTING***************************************
+    m_teleArm = new TelescopingArm();
+    m_hallEfect = new Hallefect();
 
     //m_ultraSonic = new UltraSonic();
     //Scheduler.getInstance().add(new GetDistance());

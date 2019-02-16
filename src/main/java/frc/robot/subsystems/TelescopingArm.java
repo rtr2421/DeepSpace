@@ -7,29 +7,34 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.GetDistance;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * Add your docs here.
  */
-public class SerialDistance extends Subsystem {
+public class TelescopingArm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  SerialPort sensor = new SerialPort(9600, SerialPort.Port.kOnboard, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
+  //Spark spark = new Spark(3);
+  double speed = 0.5;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new GetDistance());
+    // setDefaultCommand(new MySpecialCommand());
   }
 
-  public String getString()
+  public void moveArm()
   {
-    return sensor.readString();
-   //return "";
+    //spark.setSpeed(speed);
+  }
+  public void setForward(){
+    speed = Math.abs(speed);
+  }
+  public void setBackwards(){
+    speed = -Math.abs(speed);
   }
 }
+
