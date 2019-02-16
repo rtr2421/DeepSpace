@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -27,6 +29,10 @@ import frc.robot.subsystems.Hallefect;
 import frc.robot.subsystems.Photoresistor;
 import frc.robot.subsystems.TelescopingArm;
 import frc.robot.subsystems.pneumatics;
+
+import java.awt.Color;
+import java.util.Map;
+
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import frc.robot.subsystems.UltraSonic;
 
@@ -84,9 +90,13 @@ public class Robot extends TimedRobot {
     resistor = new Photoresistor();
 
     //m_ultraSonic = new UltraSonic();
+
+    m_ultraSonic = new UltraSonic();
+    
     //Scheduler.getInstance().add(new GetDistance());
     //OI must be init last
-    SmartDashboard.putNumber("Offset", TurnDegrees.offset);
+
+    SmartDashboard.putNumber("Offset", TurnDegrees.offset); 
     m_oi = new OI();
   }
 

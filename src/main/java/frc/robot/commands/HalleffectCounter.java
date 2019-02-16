@@ -8,6 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.Hallefect;
@@ -29,8 +31,6 @@ public class HalleffectCounter extends Command {
     SmartDashboard.putNumber("Count", Hallefect.getCount());
     
   }
-
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     

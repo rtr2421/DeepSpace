@@ -20,6 +20,9 @@ public class UltraSonic extends Subsystem {
   // here. Call these from Commands.
   
   AnalogInput sonicSensor = new AnalogInput(0);
+  private double distance = 0.0;
+  private double volt = 0.0;
+  private double raw = 0.0;
 
   @Override
   public void initDefaultCommand() {
@@ -28,13 +31,16 @@ public class UltraSonic extends Subsystem {
     setDefaultCommand(new Rumbler());
   }
   public Double distance(){
-    return getVoltage()* 100/512;//("volt" * scale factor/sensitivity)
+    distance = voltage()*1024;
+    return distance; //distance(mm) = volt*1024
   }
 
-  public Double getVoltage()
+  public Double voltage()
   {
-      Double volt = sonicSensor.getVoltage();
+      volt = sonicSensor.getVoltage();
+      raw = sonicSensor.getValue();
       SmartDashboard.putNumber("AnalogInput Voltage", volt);
+      SmartDashboard.putNumber("AnalogInput Raw Value", raw);
       return volt;
   }
 }
