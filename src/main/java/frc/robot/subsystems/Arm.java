@@ -32,7 +32,7 @@ public class Arm extends Subsystem {
   Encoder armEncoder;
   DigitalInput enc;
   double armModifier = .1;
-  DigitalInput switchBottom;
+  static DigitalInput switchBottom;
   DigitalInput switchTop;
   Spark sparkR;
   
@@ -41,8 +41,9 @@ public class Arm extends Subsystem {
   public Arm() {
     armEncoder = new Encoder(2,3);
     //motor = new WPI_TalonSRX(3);
-    spark = new Spark(4);
+    spark = new Spark(5);
     sparkR = new Spark(6);
+    switchBottom = new DigitalInput(1);
   }
   @Override
   public void initDefaultCommand() {
@@ -51,11 +52,26 @@ public class Arm extends Subsystem {
   public void move(){
     double speed = (OI.xBoxControl.getTriggerAxis(Hand.kRight) - OI.xBoxControl.getTriggerAxis(Hand.kLeft))*1;
     SmartDashboard.putNumber("Arm", speed);
-    spark.setSpeed(speed * leftMod);
+    if(speed > 0){
+      if(getSwitch()){
+        spark.setSpeed(0);
+        sparkR.setSpeed(0);
+      }else{
+        spark.setSpeed(speed * leftMod);
+        sparkR.setSpeed(speed * rightMod);
+      }
+    }else if(speed < 0){
+      spark.setSpeed(speed * leftMod);
+      sparkR.setSpeed(speed * rightMod);
+    }
+    
     //sparkR.setSpeed(speed * rightMod);
     //motor.set(speed);
   }
   public double getRotations(){
     return armEncoder.getDistance();
+  }
+  public static boolean getSwitch(){
+    return switchBottom.get();
   }
 }

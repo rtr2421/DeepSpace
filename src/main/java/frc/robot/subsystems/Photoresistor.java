@@ -7,37 +7,24 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.getPhotoresistorValue;
 
 /**
  * Add your docs here.
  */
-public class TelescopingArm extends Subsystem {
+public class Photoresistor extends Subsystem {
+  AnalogInput sensor = new AnalogInput(2);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
-  Spark spark = new Spark(2);
-  double speed = 1;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new getPhotoresistorValue());
   }
-
-  public void moveArm()
-  {
-    spark.set(speed);
-  }
-  public void setForward(){
-    speed = Math.abs(speed);
-  }
-  public void setBackwards(){
-    speed = -Math.abs(speed);
-  }
-  public void stop(){
-    spark.set(0);
+  public double value(){
+    return sensor.getVoltage();
   }
 }
-

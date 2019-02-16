@@ -24,6 +24,7 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hallefect;
+import frc.robot.subsystems.Photoresistor;
 import frc.robot.subsystems.TelescopingArm;
 import frc.robot.subsystems.pneumatics;
 import com.analog.adis16448.frc.ADIS16448_IMU;
@@ -58,6 +59,7 @@ public class Robot extends TimedRobot {
   public static Arm arm;
   public static TelescopingArm m_teleArm;
   public static Hallefect m_hallEfect;
+  public static Photoresistor resistor;
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -79,6 +81,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().add(new Teleop());
     m_teleArm = new TelescopingArm();
     m_hallEfect = new Hallefect();
+    resistor = new Photoresistor();
 
     //m_ultraSonic = new UltraSonic();
     //Scheduler.getInstance().add(new GetDistance());

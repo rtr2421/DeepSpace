@@ -8,38 +8,30 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.TelescopingArm;
 
-public class TeleMoveArm extends Command {
-  boolean setForward;
-  public TeleMoveArm(boolean setForward) {
+public class getPhotoresistorValue extends Command {
+  public getPhotoresistorValue() {
     // Use requires() here to declare subsystem dependencies
-    this.setForward = setForward;
-    requires(Robot.m_teleArm);
+    requires(Robot.resistor);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if(setForward){
-      Robot.m_teleArm.setForward();
-    }else{
-      Robot.m_teleArm.setBackwards();
-    }
-    Robot.m_teleArm.moveArm();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    SmartDashboard.putNumber("PhotoResistor value", Robot.resistor.value());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

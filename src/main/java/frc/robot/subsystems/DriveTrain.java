@@ -26,10 +26,10 @@ public class DriveTrain extends Subsystem {
   public static final ADIS16448_IMU imu = new ADIS16448_IMU();
   public static boolean fast;
   private static Double speedModifier = 1.0;
-  public Spark sparkL1 = new Spark(7);
+  public Spark sparkL1 = new Spark(0);
   public Spark sparkL2 = new Spark(1);
-  public Spark sparkR1 = new Spark(2);
-  public Spark sparkR2 = new Spark(3);
+  public Spark sparkR1 = new Spark(8);
+  public Spark sparkR2 = new Spark(9);
 
   SpeedControllerGroup leftGroup;
   SpeedControllerGroup rightGroup;

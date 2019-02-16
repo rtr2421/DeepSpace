@@ -29,6 +29,7 @@ public class MoveArm extends Command {
   @Override
   protected void execute() {
     Robot.arm.move();
+    SmartDashboard.putBoolean("Limit switch", Robot.arm.getSwitch());
     SmartDashboard.putNumber("Encoder",Robot.arm.getRotations());
   }
 

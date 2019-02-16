@@ -15,11 +15,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
-import frc.robot.commands.ClawReverse;
-
-
-import frc.robot.commands.MoveClaw;
-import frc.robot.commands.SetSpeed;
 import frc.robot.subsystems.CameraI2c;
 
 /**
@@ -71,6 +66,10 @@ public class OI {
     b2.whenPressed(new SetSpeed(false));
     b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
-    aButton.whileHeld(new TeleMoveArm());
+    aButton.whenPressed(new TeleMoveArm(false));
+    aButton.whenReleased(new StopTeleArm());
+    Button xButton = new JoystickButton(xBoxControl, 3);
+    xButton.whenPressed(new TeleMoveArm(true));
+    xButton.whenReleased(new StopTeleArm());
   }
 }
