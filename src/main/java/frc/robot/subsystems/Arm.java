@@ -30,22 +30,24 @@ public class Arm extends Subsystem {
   Encoder armEncoder;
   DigitalInput enc;
   double armModifier = .1;
+  DigitalInput switchBottom;
+  DigitalInput switchTop;
   
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Arm() {
     armEncoder = new Encoder(2,3);
     //motor = new WPI_TalonSRX(3);
-    spark = new Spark(0);
+    spark = new Spark(4);
   }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MoveArm());
   }
-  public void move(Double speed){
+  public void move(){
+    double speed = (-OI.xBoxControl.getTriggerAxis(Hand.kRight) + OI.xBoxControl.getTriggerAxis(Hand.kLeft))*.5;
     SmartDashboard.putNumber("Arm", speed);
-    spark.set((OI.xBoxControl.getTriggerAxis(Hand.kRight) -
-     OI.xBoxControl.getTriggerAxis(Hand.kLeft))*.5);
+    spark.setSpeed(speed);
     //motor.set(speed);
   }
   public double getRotations(){

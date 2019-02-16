@@ -28,9 +28,7 @@ public class MoveArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    armInput = (OI.xBoxControl.getTriggerAxis(Hand.kLeft) + OI.xBoxControl.getTriggerAxis(Hand.kRight))*.5;
-    SmartDashboard.putNumber("Arm throttle", armInput);
-    Robot.arm.move(armInput);
+    Robot.arm.move();
     SmartDashboard.putNumber("Encoder",Robot.arm.getRotations());
   }
 
