@@ -9,12 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.UltraSonic;
 
 public class Rumbler extends Command {
 public static double zone = 18;
+public static boolean warn = false;
 
   public Rumbler() {
     // Use requires() here to declare subsystem dependencies
@@ -37,6 +39,15 @@ public static double zone = 18;
       OI.xBoxControl.setRumble(RumbleType.kLeftRumble, zone - (distance/zone));
       OI.xBoxControl.setRumble(RumbleType.kRightRumble, zone - (distance/zone));
     }
+    if(distance < 360) {
+      warn = true;
+    }
+    else {
+      warn = false;
+    }
+    
+    SmartDashboard.putNumber("Ultrasonic Distance", distance);
+    SmartDashboard.putBoolean("WARNING", warn);
   }
 
   // Make this return true when this Command no longer needs to run execute()
