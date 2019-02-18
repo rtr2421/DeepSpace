@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
 import frc.robot.commands.GuideToTarget;
 import frc.robot.commands.JoystickDrive;
 import com.analog.adis16448.frc.*;
@@ -24,12 +25,11 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static final ADIS16448_IMU imu = new ADIS16448_IMU();
-  public static boolean fast;
-  private static Double speedModifier = 1.0;
-  public Spark sparkL1 = new Spark(8);
-  public Spark sparkL2 = new Spark(1);
-  public Spark sparkR1 = new Spark(2);
-  public Spark sparkR2 = new Spark(3);
+  public static Double speedModifier = 1.0;
+  public Spark sparkL1 = new Spark(RobotMap.LEFTMOTOR_1);
+  public Spark sparkL2 = new Spark(RobotMap.LEFTMOTOR_2);
+  public Spark sparkR1 = new Spark(RobotMap.RIGHTMOTOR_1);
+  public Spark sparkR2 = new Spark(RobotMap.RIGHTMOTOR_2);
 
   SpeedControllerGroup leftGroup;
   SpeedControllerGroup rightGroup;
@@ -48,12 +48,11 @@ public class DriveTrain extends Subsystem {
   //maybe change back to static (broken code?)
   public void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
+
     SmartDashboard.putNumber("Gyro-Z drive", imu.getAngleZ());
     Shuffleboard.selectTab("Live Window");
     Shuffleboard.update();
     SmartDashboard.putNumber("SpeedModifier", speedModifier);
-
-    
   }
   public void tankDrive(double leftSpeed, double rightSpeed){
     diffDrive.tankDrive(leftSpeed, rightSpeed);

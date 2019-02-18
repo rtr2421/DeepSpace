@@ -38,7 +38,7 @@ public class Arm extends Subsystem {
   public Arm() {
     armEncoder = new Encoder(2,3);
     //motor = new WPI_TalonSRX(3);
-    spark = new Spark(4);
+    spark = new Spark(RobotMap.ARM);
   }
   @Override
   public void initDefaultCommand() {
