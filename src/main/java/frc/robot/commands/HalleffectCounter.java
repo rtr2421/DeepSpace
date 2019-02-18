@@ -7,36 +7,34 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Hallefect;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class HalleffectCounter extends Command {
+
+  public HalleffectCounter() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_driveTrain);
+    requires(Robot.m_hallEfect);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    if(Robot.m_hallEfect.getPulse()){
+      Hallefect.setCount(Hallefect.getCount()+1);
+    }
+    SmartDashboard.putNumber("Count", Hallefect.getCount());
+    
   }
-
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Robot.m_driveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
-    double leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-    double rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-    Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    //SmartDashboard.putNumber("Left Speed: ", leftSpeed);
-    //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
+    
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

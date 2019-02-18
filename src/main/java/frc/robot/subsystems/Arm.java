@@ -24,28 +24,54 @@ import frc.robot.commands.MoveArm;
  * Add your docs here.
  */
 public class Arm extends Subsystem {
-  Spark spark;
+  //WPI_TalonSRX motor;
+  private static final double leftMod = .95;
+  private static final double rightMod = 1;
+  
   Encoder armEncoder;
   DigitalInput enc;
   double armModifier = .1;
-  DigitalInput switchBottom;
+  static DigitalInput switchBottom;
   DigitalInput switchTop;
+  Spark sparkL;
+  Spark sparkR;
   
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Arm() {
-    armEncoder = new Encoder(2,3);
-    spark = new Spark(RobotMap.ARM);
+    armEncoder = new Encoder(RobotMap.ARM_ENCODER_A, RobotMap.ARM_ENCODER_B);
+    //motor = new WPI_TalonSRX(3);
+    sparkL = new Spark(RobotMap.ARM_L);
+    sparkR = new Spark(RobotMap.ARM_R);
+    switchBottom = new DigitalInput(RobotMap.ARM_SWITCHBOTTOM);
   }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MoveArm());
   }
   public void move(){
-    double speed = (-OI.xBoxControl.getTriggerAxis(Hand.kRight) + OI.xBoxControl.getTriggerAxis(Hand.kLeft))*.5;
-    spark.setSpeed(speed);
+    double speed = (OI.xBoxControl.getTriggerAxis(Hand.kRight) - OI.xBoxControl.getTriggerAxis(Hand.kLeft))*1;
+    //SmartDashboard.putNumber("Arm", speed);
+    if(speed > 0){
+      if(getSwitch()){
+        sparkL.setSpeed(0);
+        sparkR.setSpeed(0);
+      } else {
+        sparkL.setSpeed(speed * leftMod);
+        sparkR.setSpeed(speed * rightMod);
+      }
+    } else if (speed < 0) {
+      sparkL.setSpeed(speed * leftMod);
+      sparkR.setSpeed(speed * rightMod);
+    }
+    
+    //sparkR.setSpeed(speed * rightMod);
+    //motor.set(speed);
   }
   public double getRotations(){
     return armEncoder.getDistance();
+  }
+  public static boolean getSwitch(){
+    return switchBottom.get();
   }
 }

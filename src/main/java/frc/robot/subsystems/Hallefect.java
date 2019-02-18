@@ -7,31 +7,32 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.MoveClaw;
+import frc.robot.commands.HalleffectCounter;
 
 /**
  * Add your docs here.
  */
-public class Claw extends Subsystem {
+public class Hallefect extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  static double speedModifier = 1.0;
+  DigitalInput sensor = new DigitalInput(RobotMap.HALLEFFECT);
+  static double m_count = 0.0;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new MoveClaw()); 
+     setDefaultCommand(new HalleffectCounter());
   }
-  //static Spark claw1 = new Spark(RobotMap.CLAW_1);
-  //static Spark claw2 = new Spark(RobotMap.CLAW_2);
-  public static void moveClaw(double speed){
-   // claw1.set(speed * speedModifier);
-   // claw2.set(speed * speedModifier);
-    //SmartDashboard.putNumber("Claw Speed", speed);
-    
+  public boolean getPulse(){
+    return sensor.get();
+  }
+  public static double getCount(){
+    return m_count;
+  }
+  public static void setCount(double count){
+    m_count = count;
   }
 }

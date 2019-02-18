@@ -7,41 +7,39 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.TelescopingArm;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class TeleMoveArm extends Command {
+  boolean setForward;
+  public TeleMoveArm(boolean setForward) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_driveTrain);
+    this.setForward = setForward;
+    requires(Robot.m_teleArm);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    if(setForward){
+      Robot.m_teleArm.setForward();
+    }else{
+      Robot.m_teleArm.setBackwards();
+    }
+    Robot.m_teleArm.moveArm();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Robot.m_driveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
-    double leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-    double rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-    Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    //SmartDashboard.putNumber("Left Speed: ", leftSpeed);
-    //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
+
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

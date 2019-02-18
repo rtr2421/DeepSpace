@@ -7,18 +7,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.UltraSonic;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class Rumbler extends Command {
+public static double zone = 18;
+
+  public Rumbler() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_driveTrain);
+    requires(Robot.m_ultraSonic);
   }
 
   // Called just before this Command runs the first time
@@ -29,14 +30,14 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Robot.m_driveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
-    double leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-    double rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-    Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    //SmartDashboard.putNumber("Left Speed: ", leftSpeed);
-    //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
+    double distance = Robot.m_ultraSonic.distance();
+
+    if(distance < zone){
+      distance %= zone;
+      OI.xBoxControl.setRumble(RumbleType.kLeftRumble, zone - (distance/zone));
+      OI.xBoxControl.setRumble(RumbleType.kRightRumble, zone - (distance/zone));
+    }
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
