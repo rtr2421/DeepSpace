@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -17,7 +18,7 @@ public class TelescopingArm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  Spark spark = new Spark(2);
+  Spark spark = new Spark(RobotMap.TELE_ARM);
   double speed = 1;
 
   @Override

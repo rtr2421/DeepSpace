@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.HalleffectCounter;
 
 /**
@@ -17,7 +18,7 @@ import frc.robot.commands.HalleffectCounter;
 public class Hallefect extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  DigitalInput sensor = new DigitalInput(0);
+  DigitalInput sensor = new DigitalInput(RobotMap.HALLEFFECT);
   static double m_count = 0.0;
 
   @Override

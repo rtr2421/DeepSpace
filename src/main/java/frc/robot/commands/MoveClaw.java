@@ -22,7 +22,6 @@ public class MoveClaw extends Command {
   @Override
   protected void initialize() {
     Robot.claw.moveClaw();
-    SmartDashboard.putBoolean("Claw Forward", true);
   }
 
   // Called repeatedly when this Command is scheduled to run

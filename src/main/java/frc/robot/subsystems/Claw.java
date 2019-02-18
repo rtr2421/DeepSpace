@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
 import frc.robot.commands.MoveClaw;
 
 /**
@@ -24,7 +25,7 @@ public class Claw extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new MoveClaw());
+     setDefaultCommand(new MoveClaw()); 
   }
     static Spark claw1 = new Spark(9);
     static Spark claw2 = new Spark(8);

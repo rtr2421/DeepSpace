@@ -203,7 +203,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    CameraI2c.read();
+    //CameraI2c.read();
     Scheduler.getInstance().run();
   }
 

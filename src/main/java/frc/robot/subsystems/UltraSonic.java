@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
 import frc.robot.commands.Rumbler;
 
 /**
@@ -19,10 +20,9 @@ public class UltraSonic extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   
-  AnalogInput sonicSensor = new AnalogInput(0);
+  AnalogInput sonicSensor = new AnalogInput(RobotMap.ULTRASONIC);
   private double distance = 0.0;
   private double volt = 0.0;
-  private double raw = 0.0;
 
   @Override
   public void initDefaultCommand() {
@@ -38,9 +38,6 @@ public class UltraSonic extends Subsystem {
   public Double voltage()
   {
       volt = sonicSensor.getVoltage();
-      raw = sonicSensor.getValue();
-      SmartDashboard.putNumber("AnalogInput Voltage", volt);
-      SmartDashboard.putNumber("AnalogInput Raw Value", raw);
       return volt;
   }
 }
