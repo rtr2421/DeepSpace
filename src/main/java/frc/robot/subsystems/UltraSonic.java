@@ -22,7 +22,6 @@ public class UltraSonic extends Subsystem {
   AnalogInput sonicSensor = new AnalogInput(0);
   private double distance = 0.0;
   private double volt = 0.0;
-  private double raw = 0.0;
 
   @Override
   public void initDefaultCommand() {
@@ -38,9 +37,6 @@ public class UltraSonic extends Subsystem {
   public Double voltage()
   {
       volt = sonicSensor.getVoltage();
-      raw = sonicSensor.getValue();
-      SmartDashboard.putNumber("AnalogInput Voltage", volt);
-      SmartDashboard.putNumber("AnalogInput Raw Value", raw);
       return volt;
   }
 }

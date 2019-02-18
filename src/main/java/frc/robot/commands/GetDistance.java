@@ -10,7 +10,6 @@ package frc.robot.commands;
 import java.awt.Color;
 import java.util.Map;
 
-import edu.wpi.first.wpilibj.Timer; //TESTING)@9815831597438*@^$*&^@$*&@
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -35,9 +34,11 @@ public class GetDistance extends Command {
   protected void execute() {
     //Color distanceColor = new Color((int)(Robot.m_ultraSonic.voltage()*51), 50, 100);
     distance = Robot.m_ultraSonic.distance();
-    warning = false;
     if(distance < 360) {
       warning = true;
+    }
+    else {
+      warning = false;
     }
     SmartDashboard.putBoolean("WARNING", warning);
     SmartDashboard.putNumber("Ultrasonic Distance", distance);

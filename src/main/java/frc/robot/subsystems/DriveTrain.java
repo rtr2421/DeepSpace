@@ -18,18 +18,28 @@ import frc.robot.commands.GuideToTarget;
 import frc.robot.commands.JoystickDrive;
 import com.analog.adis16448.frc.*;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 /**
  * Add your docs here.
  */
 public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  public WPI_TalonSRX talonL1;
+  public WPI_TalonSRX talonL2;
+  public WPI_TalonSRX talonR1;
+  public WPI_TalonSRX talonR2;
+
   public static final ADIS16448_IMU imu = new ADIS16448_IMU();
-  public static Double speedModifier = 1.0;
+  public static Double speedModifier;
+  /*
   public Spark sparkL1 = new Spark(RobotMap.LEFTMOTOR_1);
   public Spark sparkL2 = new Spark(RobotMap.LEFTMOTOR_2);
   public Spark sparkR1 = new Spark(RobotMap.RIGHTMOTOR_1);
   public Spark sparkR2 = new Spark(RobotMap.RIGHTMOTOR_2);
+  */
 
   SpeedControllerGroup leftGroup;
   SpeedControllerGroup rightGroup;
@@ -37,8 +47,15 @@ public class DriveTrain extends Subsystem {
   public DifferentialDrive diffDrive;
 
   public DriveTrain() {
-    leftGroup = new SpeedControllerGroup(sparkL1, sparkL2);
-    rightGroup = new SpeedControllerGroup(sparkR1, sparkR2);
+    talonL1 = new WPI_TalonSRX(RobotMap.LEFTMOTOR_1);
+    talonL2 = new WPI_TalonSRX(RobotMap.LEFTMOTOR_2);
+    talonR1 = new WPI_TalonSRX(RobotMap.RIGHTMOTOR_1);
+    talonR2 = new WPI_TalonSRX(RobotMap.RIGHTMOTOR_2);
+
+    speedModifier = 1.0;
+    
+    leftGroup = new SpeedControllerGroup(talonL1, talonL2);
+    rightGroup = new SpeedControllerGroup(talonR1, talonR2);
 
     diffDrive = new DifferentialDrive(leftGroup, rightGroup);
     imu.reset();
@@ -48,15 +65,9 @@ public class DriveTrain extends Subsystem {
   //maybe change back to static (broken code?)
   public void drive(double leftSpeed, double rightSpeed) {
     diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
-
-    SmartDashboard.putNumber("Gyro-Z drive", imu.getAngleZ());
-    Shuffleboard.selectTab("Live Window");
-    Shuffleboard.update();
-    SmartDashboard.putNumber("SpeedModifier", speedModifier);
   }
   public void tankDrive(double leftSpeed, double rightSpeed){
     diffDrive.tankDrive(leftSpeed, rightSpeed);
-    SmartDashboard.putNumber("Gyro-Z drive", imu.getAngleZ());
   }
   
 
@@ -83,6 +94,8 @@ public class DriveTrain extends Subsystem {
   public double getGyroZ(){
     return imu.getAngleZ();
   }
-
+  public void resetGyro() {
+    imu.reset();
+  }
   
 }

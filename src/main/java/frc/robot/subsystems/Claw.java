@@ -30,8 +30,6 @@ public class Claw extends Subsystem {
   static Spark claw2 = new Spark(RobotMap.CLAW_2);
   public static void moveClaw(double speed){
     claw1.set(speed * speedModifier);
-    claw2.set(speed * speedModifier);
-    SmartDashboard.putNumber("Claw Speed", speed);
-    
+    claw2.set(speed * speedModifier);    
   }
 }

@@ -29,7 +29,7 @@ public class MoveArm extends Command {
   @Override
   protected void execute() {
     Robot.arm.move();
-    SmartDashboard.putNumber("Encoder",Robot.arm.getRotations());
+    //SmartDashboard.putNumber("Encoder",Robot.arm.getRotations());
   }
 
   // Make this return true when this Command no longer needs to run execute()

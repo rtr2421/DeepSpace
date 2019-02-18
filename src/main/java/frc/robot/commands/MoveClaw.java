@@ -22,7 +22,7 @@ public class MoveClaw extends Command {
   @Override
   protected void initialize() {
     Claw.moveClaw(-1);
-    SmartDashboard.putBoolean("Claw Forward", true);
+    //SmartDashboard.putBoolean("Claw Forward", true);
   }
 
   // Called repeatedly when this Command is scheduled to run

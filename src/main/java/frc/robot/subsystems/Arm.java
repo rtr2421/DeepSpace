@@ -19,13 +19,11 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.MoveArm;
-//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * Add your docs here.
  */
 public class Arm extends Subsystem {
-  //WPI_TalonSRX motor;
   Spark spark;
   Encoder armEncoder;
   DigitalInput enc;
@@ -37,7 +35,6 @@ public class Arm extends Subsystem {
   // here. Call these from Commands.
   public Arm() {
     armEncoder = new Encoder(2,3);
-    //motor = new WPI_TalonSRX(3);
     spark = new Spark(RobotMap.ARM);
   }
   @Override
@@ -46,9 +43,7 @@ public class Arm extends Subsystem {
   }
   public void move(){
     double speed = (-OI.xBoxControl.getTriggerAxis(Hand.kRight) + OI.xBoxControl.getTriggerAxis(Hand.kLeft))*.5;
-    SmartDashboard.putNumber("Arm", speed);
     spark.setSpeed(speed);
-    //motor.set(speed);
   }
   public double getRotations(){
     return armEncoder.getDistance();

@@ -33,16 +33,16 @@ public class TurnDegrees extends Command {
   @Override
   protected void initialize() {
     this.target = CameraI2c.read();
-    SmartDashboard.putNumber("Target", target);
+    //SmartDashboard.putNumber("Target", target);
     isLeft = target<0;
-    SmartDashboard.putBoolean("IsLeft", isLeft);
+    //SmartDashboard.putBoolean("IsLeft", isLeft);
     if(isLeft){
       turnAngle = Robot.m_driveTrain.getGyroZ() - Math.abs(target);
     }else{
       turnAngle = Robot.m_driveTrain.getGyroZ() + Math.abs(target);
     }
-    SmartDashboard.putNumber("Gyro angle of target", turnAngle);
-    SmartDashboard.putNumber("Angle to target", target);
+    //SmartDashboard.putNumber("Gyro angle of target", turnAngle);
+    //SmartDashboard.putNumber("Angle to target", target);
     
     if(isLeft) {
       leftSpeed = -.5;
@@ -88,9 +88,9 @@ public class TurnDegrees extends Command {
         }
       }
     }
-    SmartDashboard.putNumber("GyroZ turnangle", gyroZ);
-    SmartDashboard.putNumber("TurnAngle",turnAngle);
-    SmartDashboard.putBoolean("Stopped", finished);
+    //SmartDashboard.putNumber("GyroZ turnangle", gyroZ);
+    //SmartDashboard.putNumber("TurnAngle",turnAngle);
+    //SmartDashboard.putBoolean("Stopped", finished);
     
     return finished;
   }

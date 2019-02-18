@@ -20,8 +20,7 @@ public class pneumatics extends Subsystem {
   // here. Call these from Commands.
   public static Compressor compressor = new Compressor(0);
   public static DoubleSolenoid doubleSol = new DoubleSolenoid(0, 1);
-  public pneumatics(){
-    System.out.println("Compressor Init");
+  public pneumatics() {
     compressor = new Compressor(0);
     compressor.setClosedLoopControl(true);
     compressor.start();
