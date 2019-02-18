@@ -21,7 +21,7 @@ public class MoveClaw extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Claw.moveClaw(-1);
+    Robot.claw.moveClaw();
     SmartDashboard.putBoolean("Claw Forward", true);
   }
 

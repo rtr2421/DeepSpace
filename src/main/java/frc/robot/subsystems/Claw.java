@@ -19,18 +19,18 @@ import frc.robot.commands.MoveClaw;
 public class Claw extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  double speed = .5;
   static double speedModifier = 1.0;
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
      setDefaultCommand(new MoveClaw());
   }
-  //static Spark claw1 = new Spark(9);
-  //static Spark claw2 = new Spark(8);
-  public static void moveClaw(double speed){
-   // claw1.set(speed * speedModifier);
-   // claw2.set(speed * speedModifier);
-    SmartDashboard.putNumber("Claw Speed", speed);
+    static Spark claw1 = new Spark(9);
+    static Spark claw2 = new Spark(8);
+  public void moveClaw(){
+   claw1.set(speed * speedModifier);
+   claw2.set(speed * speedModifier);
     
   }
 }

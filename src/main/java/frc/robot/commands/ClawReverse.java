@@ -10,7 +10,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.Claw;
 
 public class ClawReverse extends Command {
   public ClawReverse() {
@@ -23,7 +22,7 @@ public class ClawReverse extends Command {
   @Override
   protected void initialize() {
     SmartDashboard.putBoolean("Claw Reversed", true);
-    Claw.moveClaw(1);
+    Robot.claw.moveClaw();
   }
 
   // Called repeatedly when this Command is scheduled to run
