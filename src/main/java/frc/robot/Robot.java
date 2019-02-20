@@ -27,6 +27,7 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hallefect;
+import frc.robot.subsystems.LaserFinder;
 import frc.robot.subsystems.Photoresistor;
 import frc.robot.subsystems.Ramps;
 import frc.robot.subsystems.TelescopingArm;
@@ -93,6 +94,7 @@ public class Robot extends TimedRobot {
     m_hallEfect = new Hallefect();
     resistor = new Photoresistor();
     m_timer = new Timer();
+    SmartDashboard.putBoolean("TankDrive", false);
     //m_ramps = new Ramps();
 
     //m_ultraSonic = new UltraSonic();
@@ -119,6 +121,7 @@ public class Robot extends TimedRobot {
     //--------------------------Do 10 times per Second --------------------------------------------------
     if(m_timer.hasPeriodPassed(.1)){
       CameraI2c.read();
+      LaserFinder.read();
       m_timer.reset();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////

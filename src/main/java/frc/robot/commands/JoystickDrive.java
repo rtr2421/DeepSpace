@@ -29,10 +29,21 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Robot.m_driveTrain.drive(OI.xBoxControl.getY(), OI.xBoxControl.getX());
-    double leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-    double rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-    Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
+    double rightSpeed = 0.0;
+    double leftSpeed = 0.0;
+    boolean tankDrive = false;
+    SmartDashboard.getBoolean("TankDrive", tankDrive);
+    //
+    if(tankDrive){
+      leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
+      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
+      Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
+    }else{
+      leftSpeed = OI.xBoxControl.getX(Hand.kRight);
+      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
+      Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
+    }
+    
     //SmartDashboard.putNumber("Left Speed: ", leftSpeed);
     //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
   }

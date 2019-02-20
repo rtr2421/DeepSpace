@@ -19,7 +19,7 @@ public class LaserFinder extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static I2C Wire;
-  public static int distance;
+  public static double distance;
   public LaserFinder(){
     Wire = new I2C(Port.kOnboard, 0x35);
   }
@@ -29,7 +29,7 @@ public class LaserFinder extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   
-    public static int read(){
+    public static double read(){
       String received = "";
       char[] ch = new char[20];
       byte[] toSend = new byte[1];
@@ -42,7 +42,7 @@ public class LaserFinder extends Subsystem {
         }
       }
       if(!received.isBlank()){
-        distance = Integer.parseInt(received);
+        distance = Double.parseDouble(received);
       }
       SmartDashboard.putNumber("Distance from laser", distance);
       return distance;
