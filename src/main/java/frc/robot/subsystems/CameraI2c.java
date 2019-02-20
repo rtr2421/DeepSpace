@@ -45,6 +45,7 @@ public class CameraI2c extends Subsystem {
     if(!received.isBlank()){
       angle = Integer.parseInt(received);
     }
+    SmartDashboard.putString("RAW from arduino", received);
     SmartDashboard.putNumber("Angle to target", angle);
     return angle;
   }

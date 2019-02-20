@@ -11,6 +11,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -27,6 +28,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hallefect;
 import frc.robot.subsystems.Photoresistor;
+import frc.robot.subsystems.Ramps;
 import frc.robot.subsystems.TelescopingArm;
 import frc.robot.subsystems.pneumatics;
 
@@ -66,6 +68,8 @@ public class Robot extends TimedRobot {
   public static TelescopingArm m_teleArm;
   public static Hallefect m_hallEfect;
   public static Photoresistor resistor;
+  public static Timer m_timer;
+  //public static Ramps m_ramps;
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -88,6 +92,8 @@ public class Robot extends TimedRobot {
     m_teleArm = new TelescopingArm();
     m_hallEfect = new Hallefect();
     resistor = new Photoresistor();
+    m_timer = new Timer();
+    //m_ramps = new Ramps();
 
     //m_ultraSonic = new UltraSonic();
 
@@ -110,6 +116,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    //--------------------------Do 10 times per Second --------------------------------------------------
+    if(m_timer.hasPeriodPassed(.1)){
+      CameraI2c.read();
+      m_timer.reset();
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     //m_serialPort.getString();  //REMOVE LATER LSKJDFLKSDFLJAFHSDGJOEWJ9248&(*#@!^%(*!@&$(*@&$37)))
     //CameraI2c.read();
     /*

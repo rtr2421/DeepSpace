@@ -37,11 +37,12 @@ public class RobotMap {
   public final static int HALLEFFECT = 0; //UNUSED(?)
 
   //PWM
-  public final static int ARM_L = 0;
-  public final static int ARM_R = 1;
-  public final static int TELE_ARM = 2;
+  public final static int ARM_L = 4;
+  public final static int ARM_R = 5;
+  public final static int TELE_ARM = 6;
   //public final static int CLAW_1 = 6;
   //public final static int CLAW_2 = 7;
+  public static final int RAMPS = 9;
   
   //CAN
   public final static int LEFTMOTOR_1 = 0;  

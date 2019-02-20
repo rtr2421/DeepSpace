@@ -58,18 +58,15 @@ public class OI {
    button.whenPressed(new TurnDegrees());
 
 
-    Button b1 = new JoystickButton(xBoxControl, 6);
-    b1.whenPressed(new SetSpeed(true));
     //b1.whenReleased(new SetSpeed(false));
 
-    Button b2 = new JoystickButton(xBoxControl, 5);
-    b2.whenPressed(new SetSpeed(false));
-    b2.close();
     Button aButton = new JoystickButton(xBoxControl, 1);
     aButton.whenPressed(new TeleMoveArm(false));
     aButton.whenReleased(new StopTeleArm());
     Button xButton = new JoystickButton(xBoxControl, 3);
     xButton.whenPressed(new TeleMoveArm(true));
     xButton.whenReleased(new StopTeleArm());
+    Button yButton = new JoystickButton(xBoxControl, 4);
+    yButton.whenPressed(new LowerRamps());
   }
 }

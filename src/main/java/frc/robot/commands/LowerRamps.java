@@ -7,55 +7,30 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.UltraSonic;
 
-public class Rumbler extends Command {
-public static double zone = 18;
-public static boolean warn = false;
-
-  public Rumbler() {
+public class LowerRamps extends Command {
+  public LowerRamps() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_ultraSonic);
+   // requires(Robot.m_ramps);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    //Robot.m_ramps.lower();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double distance = Robot.m_ultraSonic.distance();
-
-    if(distance < zone){
-      OI.xBoxControl.setRumble(RumbleType.kLeftRumble, 1 - (distance/zone));
-      OI.xBoxControl.setRumble(RumbleType.kRightRumble, 1 - (distance/zone));
-    }else{
-      OI.xBoxControl.setRumble(RumbleType.kLeftRumble, 0);
-      OI.xBoxControl.setRumble(RumbleType.kRightRumble, 0);
-    }
-    if(distance < zone) {
-      warn = true;
-    }
-    else {
-      warn = false;
-    }
-    
-    SmartDashboard.putNumber("Ultrasonic Distance", distance);
-    SmartDashboard.putBoolean("WARNING", warn);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
