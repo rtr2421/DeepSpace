@@ -70,6 +70,7 @@ public class Robot extends TimedRobot {
   public static Hallefect m_hallEfect;
   public static Photoresistor resistor;
   public static Timer m_timer;
+  public static LaserFinder m_laser;
   //public static Ramps m_ramps;
   /**
    * This function is run when the robot is first started up and should be used
@@ -81,7 +82,7 @@ public class Robot extends TimedRobot {
     com.setClosedLoopControl(true);
     com.start();
     claw = new Claw();
-    arm = new Arm();
+    //arm = new Arm();
     camera = new CameraI2c();
     m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -94,6 +95,7 @@ public class Robot extends TimedRobot {
     m_hallEfect = new Hallefect();
     resistor = new Photoresistor();
     m_timer = new Timer();
+    //m_laser = new LaserFinder();
     SmartDashboard.putBoolean("TankDrive", false);
     //m_ramps = new Ramps();
 
@@ -121,7 +123,7 @@ public class Robot extends TimedRobot {
     //--------------------------Do 10 times per Second --------------------------------------------------
     if(m_timer.hasPeriodPassed(.1)){
       CameraI2c.read();
-      LaserFinder.read();
+      
       m_timer.reset();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////

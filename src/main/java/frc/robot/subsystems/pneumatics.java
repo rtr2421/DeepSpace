@@ -21,6 +21,7 @@ public class pneumatics extends Subsystem {
   // here. Call these from Commands.
   public static Compressor compressor;
   public static DoubleSolenoid doubleSol = new DoubleSolenoid(RobotMap.DOUBLESOL_FORWARD, RobotMap.DOUBLESOL_REVERSE);
+  public static DoubleSolenoid doubleSol2 = new DoubleSolenoid(RobotMap.DOUBLESOL_FORWARD1, RobotMap.DOUBLESOL_REVERSE1);
   public pneumatics() {
     compressor = new Compressor(RobotMap.PNEUMATIC_COMPRESSOR);
     compressor.setClosedLoopControl(true);
@@ -35,11 +36,14 @@ public class pneumatics extends Subsystem {
 
   public static void extend() {
     doubleSol.set(DoubleSolenoid.Value.kForward);
+    doubleSol2.set(DoubleSolenoid.Value.kForward);
   }
   public static void retract() {
     doubleSol.set(DoubleSolenoid.Value.kReverse);
+    doubleSol2.set(DoubleSolenoid.Value.kReverse);
   }
   public static void stop() {
     doubleSol.set(DoubleSolenoid.Value.kOff);
+    doubleSol2.set(DoubleSolenoid.Value.kOff);
   }
 }

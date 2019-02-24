@@ -7,18 +7,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class laserUpdater extends Command {
+  public laserUpdater() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_driveTrain);
+    requires(Robot.m_laser);
   }
 
   // Called just before this Command runs the first time
@@ -29,24 +24,8 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double rightSpeed = 0.0;
-    double leftSpeed = 0.0;
-    boolean tankDrive = false;
-    tankDrive = SmartDashboard.getBoolean("TankDrive", tankDrive);
-    if(tankDrive){
-      leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    }else{
-      leftSpeed = OI.xBoxControl.getX(Hand.kRight);
-      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
-    }
-    
-    //SmartDashboard.putNumber("Left Speed: ", leftSpeed);
-    //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
+    Robot.m_laser.read();
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

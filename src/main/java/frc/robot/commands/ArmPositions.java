@@ -7,18 +7,24 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Arm;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class ArmPositions extends Command {
+  private static double pos1 = 0.0;
+  private static double pos2 = 0.1;
+  private static double pos3 = 0.2;
+  private static double pos4 = 0.4;
+  private static double pos5 = 0.0;
+  private static double pos6 = 0.1;
+  private static double pos7 = 0.2;
+  private static double pos8 = 0.4;
+  private static double[] positions;
+  public ArmPositions(int positionToMoveTo) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_driveTrain);
+    requires(Robot.arm);
+    requires(Robot.m_laser);
   }
 
   // Called just before this Command runs the first time
@@ -29,29 +35,15 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double rightSpeed = 0.0;
-    double leftSpeed = 0.0;
-    boolean tankDrive = false;
-    tankDrive = SmartDashboard.getBoolean("TankDrive", tankDrive);
-    if(tankDrive){
-      leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    }else{
-      leftSpeed = OI.xBoxControl.getX(Hand.kRight);
-      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
-    }
-    
-    //SmartDashboard.putNumber("Left Speed: ", leftSpeed);
-    //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(true){
+      return true;
+    }
+    return true;
   }
 
   // Called once after isFinished returns true

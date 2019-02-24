@@ -27,8 +27,8 @@ public class Claw extends Subsystem {
     // Set the default command for a subsystem here.
      setDefaultCommand(new MoveClaw()); 
   }
-    static Spark claw1 = new Spark(9);
-    static Spark claw2 = new Spark(8);
+    static Spark claw1 = new Spark(RobotMap.CLAW_1);
+    static Spark claw2 = new Spark(RobotMap.CLAW_2);
   public void moveClaw(){
    claw1.set(speed * speedModifier);
    claw2.set(speed * speedModifier);
