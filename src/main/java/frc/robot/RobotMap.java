@@ -27,7 +27,7 @@ public class RobotMap {
 
   //Analog
   public final static int PHOTORESISTOR = 0;  
-  public final static int ULTRASONIC = 3;
+  //public final static int ULTRASONIC = 3;
   public static final int STRING_POT = 2;
   //public final static int ARMLIMITSWITCH = 2;
 
@@ -36,6 +36,8 @@ public class RobotMap {
   public final static int ARM_ENCODER_B = 3;
   public final static int ARM_SWITCHBOTTOM = 1;
   public final static int HALLEFFECT = 0; //UNUSED(?)
+  public final static int ULTRASONIC = 4;
+  public final static int ULTRASONIC_ECHO = 5;
 
   //PWM
   public final static int ARM_L = 3;//
