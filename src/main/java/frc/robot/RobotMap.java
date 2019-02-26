@@ -28,6 +28,7 @@ public class RobotMap {
   //Analog
   public final static int PHOTORESISTOR = 0;  
   public final static int ULTRASONIC = 3;
+  public static final int STRING_POT = 2;
   //public final static int ARMLIMITSWITCH = 2;
 
   //DIO
@@ -39,10 +40,10 @@ public class RobotMap {
   //PWM
   public final static int ARM_L = 3;//
   public final static int ARM_R = 4;//
-  public final static int TELE_ARM = 1;//
-  public final static int CLAW_1 = 6;//
+  public final static int TELE_ARM = 6;//
+  public final static int CLAW_1 = 2;//
   public final static int CLAW_2 = 5;//
-  public static final int RAMPS = 1;//
+  public static final int RAMPS = 0;//
   
   //CAN
   public final static int LEFTMOTOR_1 = 0;  

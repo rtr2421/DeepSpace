@@ -54,12 +54,12 @@ public class OI {
 
   public OI() {
    // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
-   Button button = new JoystickButton(xBoxControl, 2);
-   button.whenPressed(new TurnDegrees());
-
-
-    //b1.whenReleased(new SetSpeed(false));
-
+    Button button = new JoystickButton(xBoxControl, 2);
+    button.whenPressed(new TurnDegrees());
+    Button bumper = new JoystickButton(xBoxControl, 6);
+    bumper.whenPressed(new MoveArm());
+    Button bumper2 = new JoystickButton(xBoxControl, 5);
+    bumper2.whenPressed(new DownArm());
     Button aButton = new JoystickButton(xBoxControl, 1);
     aButton.whenPressed(new TeleMoveArm(false));
     aButton.whenReleased(new StopTeleArm());

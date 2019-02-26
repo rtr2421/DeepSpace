@@ -7,33 +7,24 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.StringpotDriver;
 
 /**
  * Add your docs here.
  */
-public class Ramps extends Subsystem {
+public class StringPot extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final double speed = .5;
-  Spark motor;
+  AnalogInput sensor = new AnalogInput(RobotMap.STRING_POT);
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new StringpotDriver());
   }
-  public Ramps(){
-    motor = new Spark(RobotMap.RAMPS);
-  }
-  public void lower(){
-    motor.set(speed);
-  }
-  public void raise(){
-    motor.setSpeed(speed);
-  }
-  public void stop(){
-    motor.set(0);
+  public double readPos(){
+    return sensor.getValue();
   }
 }

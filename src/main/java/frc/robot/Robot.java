@@ -30,6 +30,7 @@ import frc.robot.subsystems.Hallefect;
 import frc.robot.subsystems.LaserFinder;
 import frc.robot.subsystems.Photoresistor;
 import frc.robot.subsystems.Ramps;
+import frc.robot.subsystems.StringPot;
 import frc.robot.subsystems.TelescopingArm;
 import frc.robot.subsystems.pneumatics;
 
@@ -71,6 +72,7 @@ public class Robot extends TimedRobot {
   public static Photoresistor resistor;
   public static Timer m_timer;
   public static LaserFinder m_laser;
+  public static StringPot m_stringPot;
   //public static Ramps m_ramps;
   /**
    * This function is run when the robot is first started up and should be used
@@ -95,6 +97,7 @@ public class Robot extends TimedRobot {
     m_hallEfect = new Hallefect();
     resistor = new Photoresistor();
     m_timer = new Timer();
+    m_stringPot = new StringPot();
     //m_laser = new LaserFinder();
     SmartDashboard.putBoolean("TankDrive", false);
     //m_ramps = new Ramps();
@@ -105,7 +108,7 @@ public class Robot extends TimedRobot {
     
     //Scheduler.getInstance().add(new GetDistance());
     //OI must be init last
-
+    SmartDashboard.putNumber("Claw Speed", claw.speed);
     SmartDashboard.putNumber("Offset", TurnDegrees.offset); 
     m_oi = new OI();
   }

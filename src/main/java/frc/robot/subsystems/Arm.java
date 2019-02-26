@@ -35,7 +35,7 @@ public class Arm extends Subsystem {
   DigitalInput switchTop;
   Spark sparkL;
   Spark sparkR;
-  
+  double speed = 1;
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Arm() {
@@ -50,9 +50,7 @@ public class Arm extends Subsystem {
     setDefaultCommand(new MoveArm());
   }
   public void move(){
-    double speed = (OI.xBoxControl.getTriggerAxis(Hand.kRight) - OI.xBoxControl.getTriggerAxis(Hand.kLeft))*1;
     //SmartDashboard.putNumber("Arm", speed);
-    if(speed > 0){
       if(getSwitch()){
         sparkL.setSpeed(0);
         sparkR.setSpeed(0);
@@ -60,10 +58,6 @@ public class Arm extends Subsystem {
         sparkL.setSpeed(speed * leftMod);
         sparkR.setSpeed(speed * rightMod);
       }
-    } else if (speed < 0) {
-      sparkL.setSpeed(speed * leftMod);
-      sparkR.setSpeed(speed * rightMod);
-    }
     
     //sparkR.setSpeed(speed * rightMod);
     //motor.set(speed);
@@ -73,5 +67,13 @@ public class Arm extends Subsystem {
   }
   public static boolean getSwitch(){
     return switchBottom.get();
+  }
+  public void moveDown(){
+    sparkL.setSpeed(speed * leftMod);
+    sparkR.setSpeed(speed * rightMod);
+  }
+  public void stop(){
+    sparkL.setSpeed(0);
+    sparkR.setSpeed(0);
   }
 }

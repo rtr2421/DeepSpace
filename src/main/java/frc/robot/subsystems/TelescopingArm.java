@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.StopTeleArm;
 
 /**
  * Add your docs here.
@@ -19,12 +20,12 @@ public class TelescopingArm extends Subsystem {
   // here. Call these from Commands.
 
   Spark spark = new Spark(RobotMap.TELE_ARM);
-  double speed = 1;
+  double speed = 0;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+     setDefaultCommand(new StopTeleArm());
   }
 
   public void moveArm()
