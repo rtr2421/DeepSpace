@@ -30,9 +30,7 @@ public class Ramps extends Subsystem {
   public void lower(){
     motor.set(speed);
   }
-  public void raise(){
-    motor.setSpeed(speed);
-  }
+
   public void stop(){
     motor.set(0);
   }

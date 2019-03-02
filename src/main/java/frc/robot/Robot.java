@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
  */
 
   //private static final boolean PUT_NUMBER = SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
-  
+  public static Ramps m_ramps;
   public static Teleop m_teleop;
   Command m_autonomousCommand;
   Compressor com = new Compressor(0);
@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
     m_stringPot = new StringPot();
     m_laser = new LaserFinder();
     SmartDashboard.putBoolean("TankDrive", false);
-    //m_ramps = new Ramps();
+    m_ramps = new Ramps();
     ArmDrive armDrive = new ArmDrive();
 
     m_ultraSonic = new UltraSonic();

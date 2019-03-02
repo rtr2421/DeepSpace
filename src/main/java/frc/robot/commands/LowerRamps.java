@@ -13,13 +13,13 @@ import frc.robot.Robot;
 public class LowerRamps extends Command {
   public LowerRamps() {
     // Use requires() here to declare subsystem dependencies
-   // requires(Robot.m_ramps);
+    requires(Robot.m_ramps);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //Robot.m_ramps.lower();
+    Robot.m_ramps.lower();
   }
 
   // Called repeatedly when this Command is scheduled to run

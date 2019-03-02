@@ -28,10 +28,10 @@ public class ArmDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.xBoxControl.getBumper(Hand.kRight)){
+    if(OI.xBoxControl.getBumper(Hand.kLeft)){
       Robot.arm.move();
       SmartDashboard.putBoolean("Arm moving", true);
-    }else if(OI.xBoxControl.getBumper(Hand.kLeft)){
+    }else if(OI.xBoxControl.getBumper(Hand.kRight)){
       Robot.arm.moveDown();
       SmartDashboard.putBoolean("Arm moving", true);
     }else{

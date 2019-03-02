@@ -57,6 +57,6 @@ public class RobotMap {
   public final static int PNEUMATIC_COMPRESSOR = 0;
   public final static int DOUBLESOL_FORWARD = 0;
   public final static int DOUBLESOL_REVERSE = 1;
-  public final static int DOUBLESOL_FORWARD1 = 3;
-  public static final int DOUBLESOL_REVERSE1 = 2;
+  public final static int DOUBLESOL_FORWARD1 = 2;
+  public static final int DOUBLESOL_REVERSE1 = 3;
 }
