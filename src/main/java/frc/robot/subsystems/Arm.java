@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.MoveArm;
+import frc.robot.commands.ArmDrive;
 
 /**
  * Add your docs here.
@@ -47,16 +47,17 @@ public class Arm extends Subsystem {
   }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MoveArm());
+    setDefaultCommand(new ArmDrive());
   }
   public void move(){
     //SmartDashboard.putNumber("Arm", speed);
+    
       if(getSwitch()){
         sparkL.setSpeed(0);
         sparkR.setSpeed(0);
       } else {
-        sparkL.setSpeed(speed * leftMod);
-        sparkR.setSpeed(speed * rightMod);
+        sparkL.setSpeed(leftMod);
+        sparkR.setSpeed(rightMod);
       }
     
     //sparkR.setSpeed(speed * rightMod);
@@ -65,12 +66,12 @@ public class Arm extends Subsystem {
   public double getRotations(){
     return armEncoder.getDistance();
   }
-  public static boolean getSwitch(){
+  public boolean getSwitch(){
     return switchBottom.get();
   }
   public void moveDown(){
-    sparkL.setSpeed(speed * leftMod);
-    sparkR.setSpeed(speed * rightMod);
+    sparkL.setSpeed(-leftMod);
+    sparkR.setSpeed(-rightMod);
   }
   public void stop(){
     sparkL.setSpeed(0);

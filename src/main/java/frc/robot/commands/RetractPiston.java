@@ -10,16 +10,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DownArm extends Command {
-  public DownArm() {
+public class RetractPiston extends Command {
+  public RetractPiston() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.arm);
+    requires(Robot.m_pneumatics);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.arm.moveDown();
+    Robot.m_pneumatics.retract();
   }
 
   // Called repeatedly when this Command is scheduled to run

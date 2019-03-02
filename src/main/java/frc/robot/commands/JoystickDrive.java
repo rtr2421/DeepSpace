@@ -42,8 +42,8 @@ public class JoystickDrive extends Command {
       rightSpeed = OI.xBoxControl.getY(Hand.kRight);
       Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
     }
-    
-    //SmartDashboard.putNumber("Left Speed: ", leftSpeed);
+    SmartDashboard.putNumber("GyroAngle", Robot.m_driveTrain.getGyroZ());
+    //SmartDaShboard.putNumber("Left Speed: ", leftSpeed);
     //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
   }
   

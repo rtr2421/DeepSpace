@@ -22,7 +22,7 @@ public class LaserFinder extends Subsystem {
   public  I2C Wire;
   public  double distance;
   public LaserFinder(){
-    Wire = new I2C(Port.kOnboard, 0x53);
+    Wire = new I2C(Port.kOnboard, 8);
   }
   @Override
   public void initDefaultCommand() {

@@ -17,7 +17,7 @@ import frc.robot.subsystems.UltraSonic;
 public class Rumbler extends Command {
 public static double zone = 18;
 public static boolean warn = false;
-
+int count = 0;
   public Rumbler() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -32,8 +32,8 @@ public static boolean warn = false;
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double distance = Robot.m_ultraSonic.distance();
-
+    double distance = Robot.m_ultraSonic.getDistance();
+    if(count >= 5){
     if(distance < zone){
       OI.xBoxControl.setRumble(RumbleType.kLeftRumble, 1 - (distance/zone));
       OI.xBoxControl.setRumble(RumbleType.kRightRumble, 1 - (distance/zone));
@@ -50,6 +50,10 @@ public static boolean warn = false;
     
     SmartDashboard.putNumber("Ultrasonic Distance", distance);
     SmartDashboard.putBoolean("WARNING", warn);
+    count = 0;
+  }
+  count++;
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

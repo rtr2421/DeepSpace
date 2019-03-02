@@ -34,18 +34,18 @@ public class RobotMap {
   //DIO
   public final static int ARM_ENCODER_A = 2;  
   public final static int ARM_ENCODER_B = 3;
-  public final static int ARM_SWITCHBOTTOM = 1;
-  public final static int HALLEFFECT = 0; //UNUSED(?)
+  public final static int ARM_SWITCHBOTTOM = 0;
+  public final static int HALLEFFECT = 1; //UNUSED(?)
   public final static int ULTRASONIC = 4;
   public final static int ULTRASONIC_ECHO = 5;
 
   //PWM
-  public final static int ARM_L = 3;//
-  public final static int ARM_R = 4;//
-  public final static int TELE_ARM = 6;//
-  public final static int CLAW_1 = 2;//
-  public final static int CLAW_2 = 5;//
-  public static final int RAMPS = 0;//
+  public final static int ARM_L = 2;//
+  public final static int ARM_R = 0;//
+  public final static int TELE_ARM = 5;//
+  public final static int CLAW_1 = 3;//
+  public final static int CLAW_2 = 1;//
+  public static final int RAMPS = 4;//
   
   //CAN
   public final static int LEFTMOTOR_1 = 0;  
@@ -57,6 +57,6 @@ public class RobotMap {
   public final static int PNEUMATIC_COMPRESSOR = 0;
   public final static int DOUBLESOL_FORWARD = 0;
   public final static int DOUBLESOL_REVERSE = 1;
-  public final static int DOUBLESOL_FORWARD1 = 2;
-  public static final int DOUBLESOL_REVERSE1 = 3;
+  public final static int DOUBLESOL_FORWARD1 = 3;
+  public static final int DOUBLESOL_REVERSE1 = 2;
 }

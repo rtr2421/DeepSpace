@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.ArmDrive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Teleop;
 import frc.robot.commands.TurnDegrees;
@@ -81,10 +82,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    SmartDashboard.putBoolean("Arm moving",false);
     com.setClosedLoopControl(true);
     com.start();
     claw = new Claw();
-    //arm = new Arm();
+    arm = new Arm();
     camera = new CameraI2c();
     m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -98,11 +100,10 @@ public class Robot extends TimedRobot {
     resistor = new Photoresistor();
     m_timer = new Timer();
     m_stringPot = new StringPot();
-    //m_laser = new LaserFinder();
+    m_laser = new LaserFinder();
     SmartDashboard.putBoolean("TankDrive", false);
     //m_ramps = new Ramps();
-
-    //m_ultraSonic = new UltraSonic();
+    ArmDrive armDrive = new ArmDrive();
 
     m_ultraSonic = new UltraSonic();
     
@@ -111,6 +112,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Claw Speed", claw.speed);
     SmartDashboard.putNumber("Offset", TurnDegrees.offset); 
     m_oi = new OI();
+    m_timer.start();
   }
 
   /**
@@ -126,7 +128,7 @@ public class Robot extends TimedRobot {
     //--------------------------Do 10 times per Second --------------------------------------------------
     if(m_timer.hasPeriodPassed(.1)){
       CameraI2c.read();
-      
+      m_laser.read();
       m_timer.reset();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////

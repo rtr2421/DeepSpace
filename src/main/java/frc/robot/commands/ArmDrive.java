@@ -7,24 +7,37 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
 import frc.robot.Robot;
 
-public class StopClaw extends Command {
-  public StopClaw() {
+public class ArmDrive extends Command {
+  int count = 1;
+  public ArmDrive() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.claw);
+    requires(Robot.arm);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.claw.stop();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(OI.xBoxControl.getBumper(Hand.kRight)){
+      Robot.arm.move();
+      SmartDashboard.putBoolean("Arm moving", true);
+    }else if(OI.xBoxControl.getBumper(Hand.kLeft)){
+      Robot.arm.moveDown();
+      SmartDashboard.putBoolean("Arm moving", true);
+    }else{
+      SmartDashboard.putBoolean("Arm moving", false);
+      Robot.arm.stop();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
