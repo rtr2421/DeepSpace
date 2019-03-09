@@ -15,6 +15,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
 public class JoystickDrive extends Command {
+  boolean tankDrive = false;
   public JoystickDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -31,17 +32,17 @@ public class JoystickDrive extends Command {
   protected void execute() {
     double rightSpeed = 0.0;
     double leftSpeed = 0.0;
-    boolean tankDrive = false;
+    
     tankDrive = SmartDashboard.getBoolean("TankDrive", tankDrive);
-    if(tankDrive){
+    /*if(tankDrive){
       leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
       rightSpeed = OI.xBoxControl.getY(Hand.kRight);
       Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    }else{
+    }else{*/
       leftSpeed = OI.xBoxControl.getX(Hand.kRight);
       rightSpeed = OI.xBoxControl.getY(Hand.kRight);
       Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
-    }
+    //}
     SmartDashboard.putNumber("GyroAngle", Robot.m_driveTrain.getGyroZ());
     //SmartDaShboard.putNumber("Left Speed: ", leftSpeed);
     //SmartDashboard.putNumber("Right Speed: ", rightSpeed);

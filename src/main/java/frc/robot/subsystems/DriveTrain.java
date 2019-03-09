@@ -55,7 +55,7 @@ public class DriveTrain extends Subsystem {
     talonL1 = new WPI_TalonSRX(RobotMap.LEFTMOTOR_1);
     talonL2 = new WPI_TalonSRX(RobotMap.LEFTMOTOR_2);
     talonR1 = new WPI_TalonSRX(RobotMap.RIGHTMOTOR_1);
-    talonR2 = new WPI_TalonSRX(0);
+    talonR2 = new WPI_TalonSRX(RobotMap.RIGHTMOTOR_2);
 
     speedModifier = 1.0;
     
@@ -69,10 +69,10 @@ public class DriveTrain extends Subsystem {
 
   //maybe change back to static (broken code?)
   public void drive(double leftSpeed, double rightSpeed) {
-    diffDrive.arcadeDrive(leftSpeed * speedModifier, rightSpeed * speedModifier);
+    diffDrive.arcadeDrive(-leftSpeed * speedModifier, -rightSpeed * speedModifier);
   }
   public void tankDrive(double leftSpeed, double rightSpeed){
-    diffDrive.tankDrive((Math.pow(rightSpeed - 1, 3) + .5*(rightSpeed-1) + 1.5) * .75, (Math.pow(leftSpeed - 1, 3) + .5*(leftSpeed - 1) + 1.5) * .75);
+    diffDrive.tankDrive(-(Math.pow(rightSpeed - 1, 3) + .5*(rightSpeed-1) + 1.5) * .75, -(Math.pow(leftSpeed - 1, 3) + .5*(leftSpeed - 1) + 1.5) * .75);
   }
   
 

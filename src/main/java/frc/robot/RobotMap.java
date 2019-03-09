@@ -48,10 +48,10 @@ public class RobotMap {
   public static final int RAMPS = 4;//
   
   //CAN
-  public final static int LEFTMOTOR_1 = 0;  
+  public final static int LEFTMOTOR_1 = 3;  
   public final static int LEFTMOTOR_2 = 1;
   public final static int RIGHTMOTOR_1 = 2;
-  public final static int RIGHTMOTOR_2 = 3; 
+  public final static int RIGHTMOTOR_2 = 0; 
 
    //Pneumatics
   public final static int PNEUMATIC_COMPRESSOR = 0;

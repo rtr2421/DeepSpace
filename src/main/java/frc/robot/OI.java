@@ -60,13 +60,8 @@ public class OI {
     pistonRetract.whenPressed(new RetractPiston());
     Button button = new JoystickButton(xBoxControl, 2);
     button.whenPressed(new TurnDegrees());
-    Button aButton = new JoystickButton(xBoxControl, 1);
-    aButton.whenPressed(new TeleMoveArm(false));
-    aButton.whenReleased(new StopTeleArm());
-    Button xButton = new JoystickButton(xBoxControl, 3);
-    xButton.whenPressed(new TeleMoveArm(true));
-    xButton.whenReleased(new StopTeleArm());
-    Button yButton = new JoystickButton(xBoxControl, 4);
-    yButton.whenPressed(new LowerRamps());
+    /*Button aButton = new JoystickButton(xBoxControl, 1);
+    aButton.whenPressed(new ExtendPiston());
+    aButton.whenReleased(new StopTeleArm());*/
   }
 }

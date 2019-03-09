@@ -56,8 +56,8 @@ public class Arm extends Subsystem {
         sparkL.setSpeed(0);
         sparkR.setSpeed(0);
       } else {
-        sparkL.setSpeed(-leftMod);
-        sparkR.setSpeed(-rightMod);
+        sparkL.setSpeed(leftMod);
+        sparkR.setSpeed(rightMod);
       }
     
     //sparkR.setSpeed(speed * rightMod);
@@ -70,8 +70,8 @@ public class Arm extends Subsystem {
     return switchBottom.get();
   }
   public void moveDown(){
-    sparkL.setSpeed(leftMod);
-    sparkR.setSpeed(rightMod);
+    sparkL.setSpeed(-leftMod);
+    sparkR.setSpeed(-rightMod);
   }
   public void stop(){
     sparkL.setSpeed(0);

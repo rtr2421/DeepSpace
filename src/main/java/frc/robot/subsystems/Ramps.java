@@ -9,7 +9,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.OI;
 import frc.robot.RobotMap;
+import frc.robot.commands.LowerRamps;
 
 /**
  * Add your docs here.
@@ -22,13 +24,19 @@ public class Ramps extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+     setDefaultCommand(new LowerRamps());
   }
   public Ramps(){
     motor = new Spark(RobotMap.RAMPS);
   }
   public void lower(){
-    motor.set(speed);
+    if(OI.xBoxControl.getYButton()){
+      motor.set(speed);
+    }else if(OI.xBoxControl.getXButton()){
+      motor.set(-speed);
+    }else{
+      motor.set(0);
+    }
   }
 
   public void stop(){
