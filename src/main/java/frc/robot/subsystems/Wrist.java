@@ -23,7 +23,7 @@ public class Wrist extends Subsystem {
   private final static double SPEED = .5;
   //num of angles = 1 rotation   is it 360? no one knows
   private final static double ANGLE_TO_ROTATION = 360;
-
+  private boolean finished = false;
   private double targetAngle;
 
   Encoder wristEncoder;
@@ -44,6 +44,8 @@ public class Wrist extends Subsystem {
   }
 
   public void move() {
+    finished = false;
+    boolean down = getAngle()>targetAngle;
     if(getBottom()) {
       wristEncoder.reset();
       wristTalon.set(0);
@@ -52,15 +54,25 @@ public class Wrist extends Subsystem {
       wristTalon.set(0);
     }
     //forward = down  backwards = up
-    else if(getAngle() < targetAngle) {
-      wristTalon.set(-1*SPEED);
+    if(down){
+      if(getAngle() < targetAngle){
+        finished = true;
+        wristTalon.set(0);
+      }else{
+        finished = false;
+        wristTalon.set(SPEED);
+      }
+    }else{
+      if(getAngle() < targetAngle) {
+        wristTalon.set(-SPEED);
+      }
+      else {
+        finished = true;
+        wristTalon.set(0);
+      }
+      
     }
-    else if(getAngle() > targetAngle) {
-      wristTalon.set(SPEED);
-    }
-    else if(getAngle() == targetAngle) {
-      wristTalon.set(0);
-    }
+    
   }
 
   public boolean atTarget() {
@@ -76,7 +88,9 @@ public class Wrist extends Subsystem {
   public boolean getBottom() {
     return switchBottom.get();
   }
-
+  public boolean getFinished(){
+    return finished;
+  }
   public double getAngle(){
     return wristEncoder.getDistance()*ANGLE_TO_ROTATION;
   }
