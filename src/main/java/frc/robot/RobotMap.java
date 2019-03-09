@@ -59,4 +59,8 @@ public class RobotMap {
   public final static int DOUBLESOL_REVERSE = 1;
   public final static int DOUBLESOL_FORWARD1 = 2;
   public static final int DOUBLESOL_REVERSE1 = 3;
+  public static final int CLIMBSOL_FRONT_FORWARD = 4;
+  public static final int CLIMBSOL_FRONT_REVERSE = 5;
+  public static final int CLIMBSOL_BACK_FORWARD = 6;
+  public static final int CLIMBSOL_BACK_REVERSE =7;
 }
