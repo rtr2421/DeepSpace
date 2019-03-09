@@ -38,6 +38,8 @@ public class RobotMap {
   public final static int HALLEFFECT = 1; //UNUSED(?)
   public final static int ULTRASONIC = 4;
   public final static int ULTRASONIC_ECHO = 5;
+  public final static int WRIST_ENCODER_A = 6;
+  public final static int WRIST_ENCODER_B = 7;
 
   //PWM
   public final static int ARM_L = 2;//
@@ -52,6 +54,7 @@ public class RobotMap {
   public final static int LEFTMOTOR_2 = 1;
   public final static int RIGHTMOTOR_1 = 2;
   public final static int RIGHTMOTOR_2 = 0; 
+  public final static int WRISTMOTOR = 4;
 
    //Pneumatics
   public final static int PNEUMATIC_COMPRESSOR = 0;
