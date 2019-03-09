@@ -40,6 +40,7 @@ import java.util.Map;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import frc.robot.subsystems.UltraSonic;
+import frc.robot.subsystems.Wrist;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -53,12 +54,7 @@ public class Robot extends TimedRobot {
   public static pneumatics m_pneumatics;
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
-  //public static final ADIS16448_IMU imu = new ADIS16448_IMU(); ;
-/**
- *
- */
-
-  //private static final boolean PUT_NUMBER = SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
+  //public static final ADIS16448_IMU imu = new ADIS16448_IMU();
   public static Ramps m_ramps;
   public static Teleop m_teleop;
   Command m_autonomousCommand;
@@ -74,6 +70,7 @@ public class Robot extends TimedRobot {
   public static Timer m_timer;
   public static LaserFinder m_laser;
   public static StringPot m_stringPot;
+  public static Wrist m_wrist;
   //public static Ramps m_ramps;
   /**
    * This function is run when the robot is first started up and should be used
@@ -104,6 +101,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("TankDrive", false);
     m_ramps = new Ramps();
     ArmDrive armDrive = new ArmDrive();
+    m_wrist = new Wrist();
 
     m_ultraSonic = new UltraSonic();
     
