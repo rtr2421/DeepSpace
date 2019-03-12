@@ -9,12 +9,14 @@ package frc.robot;
 
 import java.awt.event.KeyListener;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CameraI2c;
 
 /**
@@ -51,15 +53,33 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public static XboxController xBoxControl = new XboxController(0);
+  public static XboxController xBoxControlArm = new XboxController(1);
 
   public OI() {
-   // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
+    //Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
     Button pistonExtend = new JoystickButton(xBoxControl, 8);
     pistonExtend.whenPressed(new ExtendPiston());
     Button pistonRetract = new JoystickButton(xBoxControl, 7);
     pistonRetract.whenPressed(new RetractPiston());
     Button button = new JoystickButton(xBoxControl, 2);
     button.whenPressed(new TurnDegrees());
+
+    Button lowRocket_c = new JoystickButton(xBoxControlArm, 1);
+    lowRocket_c.whenPressed(new MoveArmTo(Arm.POSITION[0]));
+    Button midRocket_c = new JoystickButton(xBoxControlArm, 2);
+    midRocket_c.whenPressed(new MoveArmTo(Arm.POSITION[1]));
+    Button highRocket_c = new JoystickButton(xBoxControlArm, 3);
+    highRocket_c.whenPressed(new MoveArmTo(Arm.POSITION[2]));
+
+    Button lowRocket_h = new JoystickButton(xBoxControlArm, 4);
+    lowRocket_h.whenPressed(new MoveArmTo(Arm.POSITION[3]));
+    Button midRocket_h = new JoystickButton(xBoxControlArm, 5);
+    midRocket_h.whenPressed(new MoveArmTo(Arm.POSITION[4]));
+    //not possible to do high rocket hatch due to no teleArm
+
+    Button cargoShip_h = new JoystickButton(xBoxControlArm, 6);
+    cargoShip_h.whenPressed(new MoveArmTo(Arm.POSITION[5]));
+
     /*Button aButton = new JoystickButton(xBoxControl, 1);
     aButton.whenPressed(new ExtendPiston());
     aButton.whenReleased(new StopTeleArm());*/

@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
@@ -24,10 +25,14 @@ import frc.robot.commands.ArmDrive;
  * Add your docs here.
  */
 public class Arm extends Subsystem {
+  //REMEMBER TO REPLACE WITH ACTUAL MEASUREMENTS))(*@&*&%(*($*!@&$@!*&#^*&@!$
+  public static final int POSITION[] = {0,1,2,3,4,5,6,7};
+
   //WPI_TalonSRX motor;
   private static final double leftMod = .95;
   private static final double rightMod = 1;
   
+  AnalogInput sensor = new AnalogInput(RobotMap.STRING_POT);
   Encoder armEncoder;
   DigitalInput enc;
   double armModifier = .1;
@@ -39,6 +44,8 @@ public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Arm() {
+    
+    //0 = lorwRockCarg  1 = midRockCarg 2 = highRockCarg  3 = lowRockHatch  4 = midRockHatch  5 = cargoShipHatch
     armEncoder = new Encoder(RobotMap.ARM_ENCODER_A, RobotMap.ARM_ENCODER_B);
     //motor = new WPI_TalonSRX(3);
     sparkL = new Spark(RobotMap.ARM_L);
@@ -49,6 +56,7 @@ public class Arm extends Subsystem {
   public void initDefaultCommand() {
     setDefaultCommand(new ArmDrive());
   }
+
   public void move(){
     //SmartDashboard.putNumber("Arm", speed);
     
@@ -63,6 +71,10 @@ public class Arm extends Subsystem {
     //sparkR.setSpeed(speed * rightMod);
     //motor.set(speed);
   }
+  
+  public int readPos(){
+    return sensor.getValue();
+  }
   public double getRotations(){
     return armEncoder.getDistance();
   }
@@ -70,8 +82,13 @@ public class Arm extends Subsystem {
     return switchBottom.get();
   }
   public void moveDown(){
-    sparkL.setSpeed(-leftMod);
-    sparkR.setSpeed(-rightMod);
+    if(getSwitch()) {
+      stop();
+    }
+    else {
+      sparkL.setSpeed(-leftMod);
+      sparkR.setSpeed(-rightMod);
+    }
   }
   public void stop(){
     sparkL.setSpeed(0);

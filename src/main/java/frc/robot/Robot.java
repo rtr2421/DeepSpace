@@ -31,7 +31,6 @@ import frc.robot.subsystems.Hallefect;
 import frc.robot.subsystems.LaserFinder;
 import frc.robot.subsystems.Photoresistor;
 import frc.robot.subsystems.Ramps;
-import frc.robot.subsystems.StringPot;
 import frc.robot.subsystems.TelescopingArm;
 import frc.robot.subsystems.pneumatics;
 
@@ -69,7 +68,6 @@ public class Robot extends TimedRobot {
   public static Photoresistor resistor;
   public static Timer m_timer;
   public static LaserFinder m_laser;
-  public static StringPot m_stringPot;
   public static Wrist m_wrist;
   //public static Ramps m_ramps;
   /**
@@ -96,7 +94,6 @@ public class Robot extends TimedRobot {
     m_hallEfect = new Hallefect();
     resistor = new Photoresistor();
     m_timer = new Timer();
-    m_stringPot = new StringPot();
     m_laser = new LaserFinder();
     SmartDashboard.putBoolean("TankDrive", false);
     m_ramps = new Ramps();
