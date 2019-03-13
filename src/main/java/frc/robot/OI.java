@@ -65,20 +65,20 @@ public class OI {
     button.whenPressed(new TurnDegrees());
 
     Button lowRocket_c = new JoystickButton(xBoxControlArm, 1);
-    lowRocket_c.whenPressed(new MoveArmTo(Arm.POSITION[0]));
+    lowRocket_c.whenPressed(new MoveArmTo(1));
     Button midRocket_c = new JoystickButton(xBoxControlArm, 2);
-    midRocket_c.whenPressed(new MoveArmTo(Arm.POSITION[1]));
+    midRocket_c.whenPressed(new MoveArmTo(2));
     Button highRocket_c = new JoystickButton(xBoxControlArm, 3);
-    highRocket_c.whenPressed(new MoveArmTo(Arm.POSITION[2]));
+    highRocket_c.whenPressed(new MoveArmTo(3));
 
     Button lowRocket_h = new JoystickButton(xBoxControlArm, 4);
-    lowRocket_h.whenPressed(new MoveArmTo(Arm.POSITION[3]));
+    lowRocket_h.whenPressed(new MoveArmTo(4));
     Button midRocket_h = new JoystickButton(xBoxControlArm, 5);
-    midRocket_h.whenPressed(new MoveArmTo(Arm.POSITION[4]));
+    midRocket_h.whenPressed(new MoveArmTo(5));
     //not possible to do high rocket hatch due to no teleArm
 
     Button cargoShip_h = new JoystickButton(xBoxControlArm, 6);
-    cargoShip_h.whenPressed(new MoveArmTo(Arm.POSITION[5]));
+    cargoShip_h.whenPressed(new MoveArmTo(6));
 
     /*Button aButton = new JoystickButton(xBoxControl, 1);
     aButton.whenPressed(new ExtendPiston());

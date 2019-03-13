@@ -11,13 +11,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmDrive;
 
@@ -26,13 +20,14 @@ import frc.robot.commands.ArmDrive;
  */
 public class Arm extends Subsystem {
   //REMEMBER TO REPLACE WITH ACTUAL MEASUREMENTS))(*@&*&%(*($*!@&$@!*&#^*&@!$
-  public static final int POSITION[] = {0,1,2,3,4,5,6,7};
-
+  public static final int POSISTIONS[] = {0,1,2,3,4,5,6,7};
+  public int position = 0;
+  public static int MARGIN_OF_ERROR = 30;
   //WPI_TalonSRX motor;
   private static final double leftMod = .95;
   private static final double rightMod = 1;
   
-  AnalogInput sensor = new AnalogInput(RobotMap.STRING_POT);
+  AnalogInput sensor;
   Encoder armEncoder;
   DigitalInput enc;
   double armModifier = .1;
@@ -44,13 +39,21 @@ public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Arm() {
-    
-    //0 = lorwRockCarg  1 = midRockCarg 2 = highRockCarg  3 = lowRockHatch  4 = midRockHatch  5 = cargoShipHatch
-    armEncoder = new Encoder(RobotMap.ARM_ENCODER_A, RobotMap.ARM_ENCODER_B);
     //motor = new WPI_TalonSRX(3);
+    sensor = new AnalogInput(RobotMap.STRING_POT);
     sparkL = new Spark(RobotMap.ARM_L);
     sparkR = new Spark(RobotMap.ARM_R);
     switchBottom = new DigitalInput(RobotMap.ARM_SWITCHBOTTOM);
+    // Go through positions, and find the one you are close to
+    for(int i : POSISTIONS){
+      if(Math.abs(readPos() - MARGIN_OF_ERROR) <= i){
+        for(int index = 0; index < POSISTIONS.length; index++){
+          if(POSISTIONS[index] == i){
+            position = index;
+          }
+        }
+      }
+    }
   }
   @Override
   public void initDefaultCommand() {
