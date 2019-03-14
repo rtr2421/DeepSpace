@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Arm;
 
 public class MoveArmTo extends Command {
   int target;
@@ -25,8 +26,8 @@ public class MoveArmTo extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    currentPos = 1024-Robot.arm.readPos();
-    isDown = currentPos > target;
+    currentPos = 430-Robot.arm.readPos();
+    isDown = currentPos > Arm.POSISTIONS[target];
     finished = false;
   }
 
@@ -34,7 +35,7 @@ public class MoveArmTo extends Command {
   @Override
   protected void execute() {
     finished = false;
-    currentPos = 1024-Robot.arm.readPos();
+    currentPos = 430-Robot.arm.readPos();
     if(isDown) {
 
       if(currentPos <= target) {
@@ -64,7 +65,7 @@ public class MoveArmTo extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return finished;
+    return false;
   }
 
   // Called once after isFinished returns true

@@ -120,6 +120,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("String pot", arm.readPos());
     //--------------------------Do 10 times per Second --------------------------------------------------
     if(m_timer.hasPeriodPassed(.1)){
       CameraI2c.read();
@@ -132,7 +133,8 @@ public class Robot extends TimedRobot {
     /*
     SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
     SmartDashboard.putNumber("Gyro-Y", m_driveTrain.getGyroY());
-    SmartDashboard.putNumber("Gyro-Z", m_driveTrain.getGyroZ());
+    SmartDashboard.putN
+    umber("Gyro-Z", m_driveTrain.getGyroZ());
     */
     /*
     TurnDegrees.offset = SmartDashboard.getNumber("Offset",  TurnDegrees.offset);

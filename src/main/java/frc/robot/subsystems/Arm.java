@@ -12,8 +12,10 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmDrive;
+import frc.robot.commands.MoveArmTo;
 
 /**
  * Add your docs here.
@@ -44,6 +46,7 @@ public class Arm extends Subsystem {
     sparkL = new Spark(RobotMap.ARM_L);
     sparkR = new Spark(RobotMap.ARM_R);
     switchBottom = new DigitalInput(RobotMap.ARM_SWITCHBOTTOM);
+    SmartDashboard.putNumber("String pot", readPos());
     // Go through positions, and find the one you are close to
     for(int i : POSISTIONS){
       if(Math.abs(readPos() - MARGIN_OF_ERROR) <= i){
@@ -57,12 +60,14 @@ public class Arm extends Subsystem {
   }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ArmDrive());
+    setDefaultCommand(new MoveArmTo(100));
+    
+    //setDefaultCommand(new ArmDrive());
   }
 
   public void move(){
     //SmartDashboard.putNumber("Arm", speed);
-    
+    SmartDashboard.putNumber("String pot", readPos());
       if(getSwitch()){
         sparkL.setSpeed(0);
         sparkR.setSpeed(0);

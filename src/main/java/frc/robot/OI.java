@@ -8,7 +8,9 @@
 package frc.robot;
 
 import java.awt.event.KeyListener;
+import java.util.ResourceBundle.Control;
 
+import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -53,7 +55,7 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public static XboxController xBoxControl = new XboxController(0);
-  public static XboxController xBoxControlArm = new XboxController(1);
+  public static Joystick xBoxControlArm = new Joystick(1);
 
   public OI() {
     //Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
