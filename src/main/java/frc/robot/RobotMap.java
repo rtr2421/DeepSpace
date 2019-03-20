@@ -41,20 +41,17 @@ public class RobotMap {
   public final static int WRIST_ENCODER_A = 6;
   public final static int WRIST_ENCODER_B = 7;
 
-  //PWM
-  public final static int ARM_L = 2;//
-  public final static int ARM_R = 0;//
-  public final static int TELE_ARM = 5;//
+  //CAN
+  public final static int ARM_L = 4;//
+  public final static int ARM_R = 5;//
   public final static int CLAW_1 = 3;//
   public final static int CLAW_2 = 1;//
-  public static final int RAMPS = 4;//
-  
-  //CAN
+ // public static final int RAMPS = 4;// NOT USED
   public final static int LEFTMOTOR_1 = 3;  
   public final static int LEFTMOTOR_2 = 1;
   public final static int RIGHTMOTOR_1 = 2;
   public final static int RIGHTMOTOR_2 = 0; 
-  public final static int WRISTMOTOR = 4;
+  public final static int WRISTMOTOR = 8;
 
    //Pneumatics
   public final static int PNEUMATIC_COMPRESSOR = 0;

@@ -56,30 +56,38 @@ public class OI {
 
   public static XboxController xBoxControl = new XboxController(0);
   public static Joystick xBoxControlArm = new Joystick(1);
-
+  Button pistonExtend = new JoystickButton(xBoxControl, 8);
+  Button pistonRetract = new JoystickButton(xBoxControl, 7);
+  Button lowRocket_c = new JoystickButton(xBoxControlArm, 1);
+  Button midRocket_c = new JoystickButton(xBoxControlArm, 2);
+  Button button = new JoystickButton(xBoxControl, 2);
+  Button highRocket_c = new JoystickButton(xBoxControlArm, 3);
+  Button lowRocket_h = new JoystickButton(xBoxControlArm, 4);
+  Button cargoShip_h = new JoystickButton(xBoxControlArm, 6);
+  Button midRocket_h = new JoystickButton(xBoxControlArm, 5);
   public OI() {
     //Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
-    Button pistonExtend = new JoystickButton(xBoxControl, 8);
+    
     pistonExtend.whenPressed(new ExtendPiston());
-    Button pistonRetract = new JoystickButton(xBoxControl, 7);
+    
     pistonRetract.whenPressed(new RetractPiston());
-    Button button = new JoystickButton(xBoxControl, 2);
+    
     button.whenPressed(new TurnDegrees());
 
-    Button lowRocket_c = new JoystickButton(xBoxControlArm, 1);
+    
     lowRocket_c.whenPressed(new MoveArmTo(1));
-    Button midRocket_c = new JoystickButton(xBoxControlArm, 2);
-    midRocket_c.whenPressed(new MoveArmTo(2));
-    Button highRocket_c = new JoystickButton(xBoxControlArm, 3);
-    highRocket_c.whenPressed(new MoveArmTo(3));
+    
+    midRocket_c.whenActive(new MoveArmTo(2));
 
-    Button lowRocket_h = new JoystickButton(xBoxControlArm, 4);
+    highRocket_c.whenActive(new MoveArmTo(3));
+
+
     lowRocket_h.whenPressed(new MoveArmTo(4));
-    Button midRocket_h = new JoystickButton(xBoxControlArm, 5);
+
     midRocket_h.whenPressed(new MoveArmTo(5));
     //not possible to do high rocket hatch due to no teleArm
 
-    Button cargoShip_h = new JoystickButton(xBoxControlArm, 6);
+
     cargoShip_h.whenPressed(new MoveArmTo(6));
 
     /*Button aButton = new JoystickButton(xBoxControl, 1);

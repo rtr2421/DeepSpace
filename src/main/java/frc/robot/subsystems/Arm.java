@@ -22,7 +22,7 @@ import frc.robot.commands.MoveArmTo;
  */
 public class Arm extends Subsystem {
   //REMEMBER TO REPLACE WITH ACTUAL MEASUREMENTS))(*@&*&%(*($*!@&$@!*&#^*&@!$
-  public static final int POSISTIONS[] = {0,1,2,3,4,5,6,7};
+  public static final int POSISTIONS[] = {20,90,130,160,210,300,480};
   public int position = 0;
   public static int MARGIN_OF_ERROR = 30;
   //WPI_TalonSRX motor;
@@ -60,15 +60,15 @@ public class Arm extends Subsystem {
   }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MoveArmTo(100));
+    //setDefaultCommand(new MoveArmTo(7));
     
-    //setDefaultCommand(new ArmDrive());
+    setDefaultCommand(new ArmDrive());
   }
 
   public void move(){
     //SmartDashboard.putNumber("Arm", speed);
     SmartDashboard.putNumber("String pot", readPos());
-      if(getSwitch()){
+     if(getSwitch()){
         sparkL.setSpeed(0);
         sparkR.setSpeed(0);
       } else {

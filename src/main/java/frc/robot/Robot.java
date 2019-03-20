@@ -30,14 +30,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Hallefect;
 import frc.robot.subsystems.LaserFinder;
 import frc.robot.subsystems.Photoresistor;
-import frc.robot.subsystems.Ramps;
-import frc.robot.subsystems.TelescopingArm;
 import frc.robot.subsystems.pneumatics;
-
-import java.awt.Color;
-import java.util.Map;
-
-import com.analog.adis16448.frc.ADIS16448_IMU;
 import frc.robot.subsystems.UltraSonic;
 import frc.robot.subsystems.Wrist;
 
@@ -54,7 +47,6 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
   //public static final ADIS16448_IMU imu = new ADIS16448_IMU();
-  public static Ramps m_ramps;
   public static Teleop m_teleop;
   Command m_autonomousCommand;
   Compressor com = new Compressor(0);
@@ -63,7 +55,6 @@ public class Robot extends TimedRobot {
   public static Claw claw;
   public static CameraI2c camera;
   public static Arm arm;
-  public static TelescopingArm m_teleArm;
   public static Hallefect m_hallEfect;
   public static Photoresistor resistor;
   public static Timer m_timer;
@@ -90,14 +81,11 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     Scheduler.getInstance().add(new Teleop());
-    m_teleArm = new TelescopingArm();
     m_hallEfect = new Hallefect();
     resistor = new Photoresistor();
     m_timer = new Timer();
     m_laser = new LaserFinder();
     SmartDashboard.putBoolean("TankDrive", false);
-    m_ramps = new Ramps();
-    ArmDrive armDrive = new ArmDrive();
     m_wrist = new Wrist();
 
     m_ultraSonic = new UltraSonic();
