@@ -20,9 +20,11 @@ import frc.robot.RobotMap;
 public class Wrist extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final static double SPEED = .5;
+  private final static double SPEED = .1;
   //num of angles = 1 rotation   is it 360? no one knows
   private final static double ANGLE_TO_ROTATION = 360;
+  public static final double TOP = 100;
+  public static final double BOTTOM = 0;
   private boolean finished = false;
   private double targetAngle;
 
@@ -55,7 +57,7 @@ public class Wrist extends Subsystem {
     }
     //forward = down  backwards = up
     if(down){
-      if(getAngle() < targetAngle){
+      if(getAngle() < targetAngle && getAngle() >= BOTTOM){
         finished = true;
         wristTalon.set(0);
       }else{
@@ -63,7 +65,7 @@ public class Wrist extends Subsystem {
         wristTalon.set(SPEED);
       }
     }else{
-      if(getAngle() < targetAngle) {
+      if(getAngle() < targetAngle && getAngle() <= TOP) {
         wristTalon.set(-SPEED);
       }
       else {
@@ -93,5 +95,8 @@ public class Wrist extends Subsystem {
   }
   public double getAngle(){
     return wristEncoder.getDistance()*ANGLE_TO_ROTATION;
+  }
+  public void stop(){
+    wristTalon.set(0);
   }
 }

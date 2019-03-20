@@ -32,47 +32,38 @@ public class MoveArmTo extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    currentPos = 500-Robot.arm.readPos();
-    isDown = currentPos > Arm.POSISTIONS[target];
+    if(Robot.arm.readPos() < target){
+      isDown = false;
+    }else if(Robot.arm.readPos() > target){
+      isDown = true;
+    }
     finished = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putNumber("Position to go to", target);
-    finished = false;
-    currentPos = 500-Robot.arm.readPos();
-    SmartDashboard.putNumber("Arm position", currentPos);
-    if(isDown) {
-
-      if(currentPos <=  Arm.POSISTIONS[target]) {
-        Robot.arm.stop();
-        finished = true;
-        
-      }
-      else {
-        Robot.arm.moveDown();
-        finished = false;
-      }
+    if(Robot.arm.readPos() == 1 && target == 1){
+      finished = true;
+    }else if(Robot.arm.readPos() == 2 && target == 2){
+      finished = true;
+    }else if(Robot.arm.readPos() == 3 && target == 3){
+      finished = true;
+    }else{
+      finished = false;
     }
-    else {
-      if(currentPos >= Arm.POSISTIONS[target]) {
-        Robot.arm.stop();
-        finished = true;
-      }
-      else {
-        Robot.arm.move();
-        finished = false;
-      }
       if(target == 7){
         Robot.m_wrist.setTarget(WRIST_ANGLE_TOP);
       }
       if(target != 7){
         Robot.m_wrist.setTarget(WRIST_ANGLE_BOTTOM);
       }
-    }
-    Robot.m_wrist.move();
+      if(!isDown){
+        Robot.m_wrist.move();
+      }else{
+        Robot.arm.moveDown();
+      }
+    
     SmartDashboard.putBoolean("Arm Done", finished);
   }
 
@@ -85,6 +76,8 @@ public class MoveArmTo extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.arm.stop();
+    Robot.m_wrist.stop();
   }
 
   // Called when another command which requires one or more of the same

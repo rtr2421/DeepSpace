@@ -9,16 +9,12 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ArmDrive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Teleop;
 import frc.robot.commands.TurnDegrees;
@@ -27,7 +23,6 @@ import frc.robot.subsystems.CameraI2c;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Hallefect;
 import frc.robot.subsystems.LaserFinder;
 import frc.robot.subsystems.Photoresistor;
 import frc.robot.subsystems.pneumatics;
@@ -55,7 +50,6 @@ public class Robot extends TimedRobot {
   public static Claw claw;
   public static CameraI2c camera;
   public static Arm arm;
-  public static Hallefect m_hallEfect;
   public static Photoresistor resistor;
   public static Timer m_timer;
   public static LaserFinder m_laser;
@@ -81,7 +75,6 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
     Scheduler.getInstance().add(new Teleop());
-    m_hallEfect = new Hallefect();
     resistor = new Photoresistor();
     m_timer = new Timer();
     m_laser = new LaserFinder();
@@ -108,6 +101,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Wrist Encoder", m_wrist.getAngle());
     SmartDashboard.putNumber("String pot", arm.readPos());
     //--------------------------Do 10 times per Second --------------------------------------------------
     if(m_timer.hasPeriodPassed(.1)){

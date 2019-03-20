@@ -32,10 +32,10 @@ public class RobotMap {
   //public final static int ARMLIMITSWITCH = 2;
 
   //DIO
-  public final static int ARM_ENCODER_A = 2;  
-  public final static int ARM_ENCODER_B = 3;
+  public final static int ARM_REED_2 = 2;  
+  public final static int ARM_REED_3 = 3;
   public final static int ARM_SWITCHBOTTOM = 0;
-  public final static int HALLEFFECT = 1; //UNUSED(?)
+  public final static int ARM_REED_1 = 1; //UNUSED(?)
   public final static int ULTRASONIC = 4;
   public final static int ULTRASONIC_ECHO = 5;
   public final static int WRIST_ENCODER_A = 6;
@@ -44,14 +44,13 @@ public class RobotMap {
   //CAN
   public final static int ARM_L = 4;//
   public final static int ARM_R = 5;//
-  public final static int CLAW_1 = 3;//
-  public final static int CLAW_2 = 1;//
- // public static final int RAMPS = 4;// NOT USED
-  public final static int LEFTMOTOR_1 = 3;  
-  public final static int LEFTMOTOR_2 = 1;
-  public final static int RIGHTMOTOR_1 = 2;
-  public final static int RIGHTMOTOR_2 = 0; 
-  public final static int WRISTMOTOR = 8;
+  public final static int CLAW_1 = 6;//
+  public final static int CLAW_2 = 7;//
+  public final static int LEFTMOTOR_1 = 3;  //
+  public final static int LEFTMOTOR_2 = 1;//
+  public final static int RIGHTMOTOR_1 = 2;//
+  public final static int RIGHTMOTOR_2 = 0; //
+  public final static int WRISTMOTOR = 8;//
 
    //Pneumatics
   public final static int PNEUMATIC_COMPRESSOR = 0;
