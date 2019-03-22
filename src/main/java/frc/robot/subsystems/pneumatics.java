@@ -18,6 +18,7 @@ import frc.robot.commands.PneumaticsDrive;
  * Add your docs here.
  */
 public class pneumatics extends Subsystem {
+  boolean out = false;
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static Compressor compressor;
@@ -54,4 +55,10 @@ public class pneumatics extends Subsystem {
     doubleSol.set(DoubleSolenoid.Value.kOff);
     doubleSol2.set(DoubleSolenoid.Value.kOff);
   }
+  public boolean getOut(){
+    return out;
+ }
+ public void toggleOut(){
+    out = !out;   
+ }
 }

@@ -15,6 +15,7 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Wrist;
 
 public class MoveArmTo extends Command {
+  int position = 0;
   int target;
   boolean isDown;
   boolean finished;
@@ -32,6 +33,7 @@ public class MoveArmTo extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    position = Robot.arm.readPos();
     if(Robot.arm.readPos() < target){
       isDown = false;
     }else if(Robot.arm.readPos() > target){

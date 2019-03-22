@@ -17,19 +17,24 @@ import frc.robot.RobotMap;
 public class Climb extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  DoubleSolenoid doubleSol = new DoubleSolenoid(RobotMap.CLIMBSOL_FRONT_FORWARD, RobotMap.CLIMBSOL_FRONT_REVERSE);
-  DoubleSolenoid doubleSolBack = new DoubleSolenoid(RobotMap.CLIMBSOL_BACK_FORWARD, RobotMap.CLIMBSOL_BACK_REVERSE);
+  DoubleSolenoid frontPiston = new DoubleSolenoid(RobotMap.CLIMBSOL_FRONT_FORWARD, RobotMap.CLIMBSOL_FRONT_REVERSE);
+  DoubleSolenoid backPiston = new DoubleSolenoid(RobotMap.CLIMBSOL_BACK_FORWARD, RobotMap.CLIMBSOL_BACK_REVERSE);
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public void raiseFront(){
-    doubleSol.set(DoubleSolenoid.Value.kForward);
-    doubleSolBack.set(DoubleSolenoid.Value.kReverse);
+  public void liftFront(){
+    frontPiston.set(DoubleSolenoid.Value.kForward);
+    backPiston.set(DoubleSolenoid.Value.kReverse);
   }
-  public void raiseBack(){
-    doubleSol.set(DoubleSolenoid.Value.kReverse);
-    doubleSolBack.set(DoubleSolenoid.Value.kForward);
+  public void dropFront(){
+    frontPiston.set(DoubleSolenoid.Value.kReverse);
+  }
+  public void liftBack(){
+    backPiston.set(DoubleSolenoid.Value.kForward);
+  }
+  public void dropBack(){
+    backPiston.set(DoubleSolenoid.Value.kReverse);
   }
 }

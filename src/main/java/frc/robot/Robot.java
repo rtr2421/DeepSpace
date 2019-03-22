@@ -21,6 +21,7 @@ import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CameraI2c;
 import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LaserFinder;
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
   public static Timer m_timer;
   public static LaserFinder m_laser;
   public static Wrist m_wrist;
+  public static Climb m_climb;
   //public static Ramps m_ramps;
   /**
    * This function is run when the robot is first started up and should be used
@@ -65,6 +67,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Arm moving",false);
     com.setClosedLoopControl(true);
     com.start();
+    m_climb = new Climb();
     claw = new Claw();
     arm = new Arm();
     camera = new CameraI2c();
@@ -102,6 +105,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Wrist Encoder", m_wrist.getAngle());
+    SmartDashboard.putNumber("Reed switch", arm.readPos());
     SmartDashboard.putNumber("String pot", arm.readPos());
     //--------------------------Do 10 times per Second --------------------------------------------------
     if(m_timer.hasPeriodPassed(.1)){

@@ -14,6 +14,7 @@ import frc.robot.OI;
 import frc.robot.Robot;
 
 public class ArmDrive extends Command {
+  public static final double WRIST_POSISTION_STRAIGHT = 15;
   int count = 1;
   public ArmDrive() {
     // Use requires() here to declare subsystem dependencies
@@ -28,6 +29,10 @@ public class ArmDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    SmartDashboard.putBoolean("Swtich one", Robot.arm.switchOne());
+    SmartDashboard.putBoolean("Switch two", Robot.arm.switchTwo());
+    SmartDashboard.putBoolean("Switch three", Robot.arm.switchThree());
+    SmartDashboard.putNumber("Arm position", Robot.arm.readPos());
     if(OI.xBoxControl.getBumper(Hand.kLeft)){
       Robot.arm.move();
       SmartDashboard.putBoolean("Arm moving", true);
@@ -37,6 +42,19 @@ public class ArmDrive extends Command {
     }else{
       SmartDashboard.putBoolean("Arm moving", false);
       Robot.arm.stop();
+    }
+    if(OI.xBoxControl.getY(Hand.kLeft) > 0){
+      Robot.m_wrist.setTarget(Robot.m_wrist.getAngle() + 1);
+      Robot.m_wrist.move();
+    }else if(OI.xBoxControl.getY(Hand.kLeft) < 0){
+      Robot.m_wrist.setTarget(Robot.m_wrist.getAngle() + 1);
+      Robot.m_wrist.move();
+    }else{
+      Robot.m_wrist.stop();
+    }
+    if(OI.xBoxControl.getStickButton(Hand.kLeft)){
+      Robot.m_wrist.setTarget(WRIST_POSISTION_STRAIGHT);
+      Robot.m_wrist.move();
     }
   }
 

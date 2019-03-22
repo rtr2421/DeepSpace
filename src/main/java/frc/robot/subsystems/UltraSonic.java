@@ -21,11 +21,12 @@ import frc.robot.commands.Rumbler;
 public class UltraSonic extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
-  Ultrasonic us = new Ultrasonic (RobotMap.ULTRASONIC, RobotMap.ULTRASONIC_ECHO, Unit.kInches);
+  AnalogInput in = new AnalogInput(RobotMap.ULTRASONIC);
+  //Ultrasonic us = new Ultrasonic (RobotMap.ULTRASONIC, RobotMap.ULTRASONIC_ECHO, Unit.kInches);
 
   public double getDistance(){
-    return us.getRangeInches();
+    return in.getVoltage() * 1024 / 25.4;
+    //return us.getRangeInches();
   }
 
   @Override

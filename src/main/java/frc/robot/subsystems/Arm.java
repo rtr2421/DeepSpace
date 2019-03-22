@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import static org.junit.Assume.assumeNoException;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -19,7 +18,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmDrive;
-import frc.robot.commands.MoveArmTo;
 
 /**
  * Add your docs here.
@@ -59,11 +57,12 @@ public class Arm extends Subsystem {
   }
   
   public int readPos(){
-    if(reedSwitch_1.get()){
+    if(!reedSwitch_1.get()){
+      SmartDashboard.putBoolean("Arm position 1", true);
       position = 1;
-    }else if(reedSwitch_2.get()){
+    }else if(!reedSwitch_2.get()){
       position = 2;
-    }else if(reedSwitch_3.get()){
+    }else if(!reedSwitch_3.get()){
       position = 3;
     }
     return position;
@@ -84,5 +83,14 @@ public class Arm extends Subsystem {
   public void stop(){
     motorL.set(0);
     motorR.set(0);
+  }
+  public boolean switchOne(){
+    return reedSwitch_1.get();
+  }
+  public boolean switchTwo(){
+    return reedSwitch_2.get();
+  }
+  public boolean switchThree(){
+    return reedSwitch_3.get();
   }
 }
