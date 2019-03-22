@@ -43,19 +43,19 @@ public class ArmDrive extends Command {
       SmartDashboard.putBoolean("Arm moving", false);
       Robot.arm.stop();
     }
-    if(OI.xBoxControl.getY(Hand.kLeft) > 0){
+    if(OI.xBoxControl.getY(Hand.kLeft) > 0 && !OI.xBoxControl.getStickButton(Hand.kLeft)){
       Robot.m_wrist.setTarget(Robot.m_wrist.getAngle() + 1);
       Robot.m_wrist.move();
-    }else if(OI.xBoxControl.getY(Hand.kLeft) < 0){
+    }else if(OI.xBoxControl.getY(Hand.kLeft) < 0 && !OI.xBoxControl.getStickButton(Hand.kLeft)){
       Robot.m_wrist.setTarget(Robot.m_wrist.getAngle() + 1);
       Robot.m_wrist.move();
-    }else{
-      Robot.m_wrist.stop();
-    }
-    if(OI.xBoxControl.getStickButton(Hand.kLeft)){
+    }else if(OI.xBoxControl.getStickButton(Hand.kLeft)){
       Robot.m_wrist.setTarget(WRIST_POSISTION_STRAIGHT);
       Robot.m_wrist.move();
+    }else {
+      Robot.m_wrist.stop();
     }
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
