@@ -61,6 +61,7 @@ public class OI {
   Button lowRocket_c = new JoystickButton(xBoxControlArm, 1);
   Button midRocket_c = new JoystickButton(xBoxControlArm, 2);
   Button button = new JoystickButton(xBoxControl, 2);
+  Button climb = new JoystickButton(xBoxControl, 1);
   Button highRocket_c = new JoystickButton(xBoxControlArm, 3);
   Button lowRocket_h = new JoystickButton(xBoxControlArm, 4);
   Button cargoShip_h = new JoystickButton(xBoxControlArm, 6);
@@ -71,7 +72,7 @@ public class OI {
     pistonExtend.whenPressed(new ExtendPiston());
     
     pistonRetract.whenPressed(new RetractPiston());
-    
+    climb.whenPressed(new ClimbStair());
     button.whenPressed(new TurnDegrees());
 
     

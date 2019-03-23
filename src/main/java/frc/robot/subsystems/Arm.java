@@ -22,7 +22,7 @@ public class Arm extends Subsystem {
   public int position = 0;
   public static int MARGIN_OF_ERROR = 30;
   //WPI_TalonSRX motor;
-  private static final double leftMod = .95;
+  private static final double leftMod = .88;
   private static final double rightMod = 1;
   private static WPI_TalonSRX motorL = new WPI_TalonSRX(RobotMap.ARM_L);
   private static WPI_TalonSRX motorR = new WPI_TalonSRX(RobotMap.ARM_R);
@@ -44,8 +44,8 @@ public class Arm extends Subsystem {
 
   public void move(){
 
-       motorL.set(speed);
-       motorR.set(speed);
+       motorL.set(speed *leftMod);
+       motorR.set(speed * rightMod);
   }
   
   public int readPos(){
@@ -63,8 +63,8 @@ public class Arm extends Subsystem {
     return switchBottom.get();
   }
   public void moveDown(){
-      motorL.set(-speed);
-      motorR.set(-speed);
+      motorL.set(-speed *leftMod);
+      motorR.set(-speed * rightMod);
   }
   public void stop(){
     motorL.set(0);
