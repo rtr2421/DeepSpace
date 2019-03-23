@@ -8,23 +8,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class ClimbStair extends Command {
   boolean finished = false;
   int step = 0;
-  final static double firstDistance = 100;
-  final static double secondDistance = 50;
+  // Step is 49 in deep
+  final static double firstDistance = 55;
+  final static double secondDistance = 29;
   public ClimbStair() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_climb);
-    requires(Robot.m_driveTrain);
+    //requires(Robot.m_driveTrain);
     requires(Robot.m_ultraSonic);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    SmartDashboard.putBoolean("Climb run", true);
     Robot.m_climb.liftFront();
   }
 

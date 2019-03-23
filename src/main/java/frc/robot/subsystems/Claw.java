@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -21,14 +23,14 @@ import frc.robot.commands.ClawDrive;
 public class Claw extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public double speed = .5;
+  public double speed = 0;
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
      setDefaultCommand(new ClawDrive()); 
   }
-    static Spark claw1 = new Spark(RobotMap.CLAW_1);
-    static Spark claw2 = new Spark(RobotMap.CLAW_2);
+    static WPI_TalonSRX claw1 = new WPI_TalonSRX(RobotMap.CLAW_1);
+    static WPI_TalonSRX claw2 = new WPI_TalonSRX(RobotMap.CLAW_2);
   public void moveForward(){
     speed = SmartDashboard.getNumber("Claw Speed", speed);
     claw2.set(speed);

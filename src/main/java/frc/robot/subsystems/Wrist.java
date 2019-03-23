@@ -20,14 +20,14 @@ import frc.robot.RobotMap;
 public class Wrist extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final static double SPEED = .1;
+  private final static double SPEED = .85;
   //num of angles = 1 rotation   is it 360? no one knows
   private final static double ANGLE_TO_ROTATION = 360;
   public static final double TOP = 100;
   public static final double BOTTOM = 0;
   private boolean finished = false;
   private double targetAngle;
-
+  double speed1, speed2, speed3;
   Encoder wristEncoder;
   DigitalInput switchBottom;
   DigitalInput switchTop;
@@ -48,13 +48,6 @@ public class Wrist extends Subsystem {
   public void move() {
     finished = false;
     boolean down = getAngle()>targetAngle;
-    if(getBottom()) {
-      wristEncoder.reset();
-      wristTalon.set(0);
-    }
-    else if(getTop()) {
-      wristTalon.set(0);
-    }
     //forward = down  backwards = up
     if(down){
       if(getAngle() < targetAngle || getAngle() <= BOTTOM){
@@ -83,13 +76,6 @@ public class Wrist extends Subsystem {
   public void setTarget(double target) {
     targetAngle = target;
   }
-
-  public boolean getTop() {
-    return switchTop.get();
-  }
-  public boolean getBottom() {
-    return switchBottom.get();
-  }
   public boolean getFinished(){
     return finished;
   }
@@ -99,8 +85,12 @@ public class Wrist extends Subsystem {
   public void stop(){
     wristTalon.set(0);
   }
-  public void raise(){
-    wristTalon.set(-SPEED);
+  public void raise(double speed){
+    speed = -speed;
+    speed3 = speed2;
+    speed2 = speed1;
+    speed1 = speed;
+    wristTalon.set((speed /4 + speed1 + speed2 + speed3) * SPEED);
   }
   public void lower(){
     wristTalon.set(SPEED);

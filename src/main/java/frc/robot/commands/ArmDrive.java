@@ -19,6 +19,7 @@ public class ArmDrive extends Command {
   public ArmDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.arm);
+    requires(Robot.m_wrist);
   }
 
   // Called just before this Command runs the first time
@@ -43,17 +44,12 @@ public class ArmDrive extends Command {
       SmartDashboard.putBoolean("Arm moving", false);
       Robot.arm.stop();
     }
-    if(OI.xBoxControl.getY(Hand.kLeft) > 0 && !OI.xBoxControl.getStickButton(Hand.kLeft)){
-      Robot.m_wrist.raise();
-      Robot.m_wrist.move();
-    }else if(OI.xBoxControl.getY(Hand.kLeft) < 0 && !OI.xBoxControl.getStickButton(Hand.kLeft)){
-      Robot.m_wrist.lower();
-      Robot.m_wrist.move();
-    }else if(OI.xBoxControl.getStickButton(Hand.kLeft)){
+    if(OI.xBoxControl.getY(Hand.kLeft) > .1 || OI.xBoxControl.getY(Hand.kLeft) < .1){
+      Robot.m_wrist.raise(OI.xBoxControl.getY(Hand.kLeft));
+    }
+    if(OI.xBoxControl.getStickButton(Hand.kLeft)){
       Robot.m_wrist.setTarget(WRIST_POSISTION_STRAIGHT);
       Robot.m_wrist.move();
-    }else {
-      Robot.m_wrist.stop();
     }
     
   }

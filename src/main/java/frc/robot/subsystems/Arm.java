@@ -48,20 +48,17 @@ public class Arm extends Subsystem {
   }
 
   public void move(){
-     if(getSwitch()){
-       motorL.set(speed);
-       motorR.set(speed);
-      } else {
-        stop();
-      }
+
+       motorL.set(speed * leftMod);
+       motorR.set(speed * rightMod);
   }
   
   public int readPos(){
-    if(!reedSwitch_1.get()){
+    if(reedSwitch_1.get()){
       position = 1;
-    }else if(!reedSwitch_2.get()){
+    }else if(reedSwitch_2.get()){
       position = 2;
-    }else if(!reedSwitch_3.get()){
+    }else if(reedSwitch_3.get()){
       position = 3;
     }
     return position;
@@ -71,13 +68,8 @@ public class Arm extends Subsystem {
     return switchBottom.get();
   }
   public void moveDown(){
-    if(getSwitch()) {
-      stop();
-    }
-    else {
-      motorL.set(speed);
-      motorR.set(speed);
-    }
+      motorL.set(-speed * leftMod);
+      motorR.set(-speed * rightMod);
   }
   public void stop(){
     motorL.set(0);

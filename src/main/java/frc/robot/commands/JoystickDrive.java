@@ -33,7 +33,7 @@ public class JoystickDrive extends Command {
     double rightSpeed = 0.0;
     double leftSpeed = 0.0;
     
-    tankDrive = SmartDashboard.getBoolean("TankDrive", tankDrive);
+
     /*if(tankDrive){
       leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
       rightSpeed = OI.xBoxControl.getY(Hand.kRight);
@@ -42,6 +42,7 @@ public class JoystickDrive extends Command {
       leftSpeed = OI.xBoxControl.getX(Hand.kRight);
       rightSpeed = OI.xBoxControl.getY(Hand.kRight);
       Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
+      SmartDashboard.putNumber("Drive train value", rightSpeed);
     //}
     SmartDashboard.putNumber("GyroAngle", Robot.m_driveTrain.getGyroZ());
     //SmartDaShboard.putNumber("Left Speed: ", leftSpeed);

@@ -107,6 +107,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Wrist Encoder", m_wrist.getAngle());
     SmartDashboard.putNumber("Reed switch", arm.readPos());
     SmartDashboard.putNumber("String pot", arm.readPos());
+    SmartDashboard.putNumber("UltraSonic", m_ultraSonic.getDistance());
     //--------------------------Do 10 times per Second --------------------------------------------------
     if(m_timer.hasPeriodPassed(.1)){
       CameraI2c.read();

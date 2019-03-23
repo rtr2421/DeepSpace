@@ -32,7 +32,7 @@ public class PneumaticsDrive extends Command {
       pneumatics.extend();
     }
     */
-    if(OI.xBoxControl.getYButton()){
+    if(OI.xBoxControl.getYButtonPressed()){
       Robot.m_pneumatics.toggleOut();
       if(Robot.m_pneumatics.getOut()){
         Robot.m_pneumatics.retract();
