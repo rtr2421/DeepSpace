@@ -90,7 +90,7 @@ public class Wrist extends Subsystem {
     speed3 = speed2;
     speed2 = speed1;
     speed1 = speed;
-    wristTalon.set((speed /4 + speed1 + speed2 + speed3) * SPEED);
+    wristTalon.set(speed * SPEED);
   }
   public void lower(){
     wristTalon.set(SPEED);

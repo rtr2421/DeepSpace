@@ -39,8 +39,8 @@ public class JoystickDrive extends Command {
       rightSpeed = OI.xBoxControl.getY(Hand.kRight);
       Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
     }else{*/
-      leftSpeed = OI.xBoxControl.getX(Hand.kRight);
-      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
+      leftSpeed = -OI.xBoxControl.getX(Hand.kRight);
+      rightSpeed = -OI.xBoxControl.getY(Hand.kRight);
       Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
       SmartDashboard.putNumber("Drive train value", rightSpeed);
     //}
