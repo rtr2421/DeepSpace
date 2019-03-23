@@ -20,7 +20,7 @@ public class ClimbStair extends Command {
   public ClimbStair() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_climb);
-    //requires(Robot.m_driveTrain);
+    requires(Robot.m_driveTrain);
     requires(Robot.m_ultraSonic);
   }
 
@@ -35,7 +35,7 @@ public class ClimbStair extends Command {
   @Override
   protected void execute() {
     if(step == 0){
-      if(Robot.m_ultraSonic.getDistance() > firstDistance){
+      if(Robot.m_ultraSonic.getDistance() < firstDistance){
         step++;
       }else{
         Robot.m_driveTrain.drive(.75, 0);

@@ -38,8 +38,8 @@ public class RobotMap {
   public final static int ARM_REED_1 = 1; //UNUSED(?)
   //public final static int ULTRASONIC = 4;
   public final static int ULTRASONIC_ECHO = 5;
-  public final static int WRIST_ENCODER_A = 7;
-  public final static int WRIST_ENCODER_B = 6;
+  public final static int WRIST_ENCODER_A = 6;
+  public final static int WRIST_ENCODER_B = 7;
 
   //CAN
   public final static int ARM_L = 4;//

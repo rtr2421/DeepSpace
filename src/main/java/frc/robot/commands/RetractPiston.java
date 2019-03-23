@@ -13,13 +13,13 @@ import frc.robot.Robot;
 public class RetractPiston extends Command {
   public RetractPiston() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_pneumatics);
+    requires(Robot.m_climb);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_pneumatics.retract();
+    Robot.m_climb.dropFront();
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -13,13 +13,13 @@ import frc.robot.Robot;
 public class ExtendPiston extends Command {
   public ExtendPiston() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_pneumatics);
+    requires(Robot.m_climb);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_pneumatics.extend();
+    Robot.m_climb.liftFront();
   }
 
   // Called repeatedly when this Command is scheduled to run

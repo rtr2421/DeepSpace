@@ -83,7 +83,8 @@ public class Robot extends TimedRobot {
     m_laser = new LaserFinder();
     SmartDashboard.putBoolean("TankDrive", false);
     m_wrist = new Wrist();
-
+    m_climb.dropFront();
+    m_climb.dropBack();
     m_ultraSonic = new UltraSonic();
     
     //Scheduler.getInstance().add(new GetDistance());

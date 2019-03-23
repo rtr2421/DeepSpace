@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -41,7 +42,7 @@ public class Wrist extends Subsystem {
   }
 
   public Wrist() {
-    wristEncoder = new Encoder(RobotMap.WRIST_ENCODER_A, RobotMap.WRIST_ENCODER_B);
+    wristEncoder = new Encoder(RobotMap.WRIST_ENCODER_A, RobotMap.WRIST_ENCODER_B, false, EncodingType.k4X);
     wristTalon = new WPI_TalonSRX(RobotMap.WRISTMOTOR);
   }
 
@@ -80,7 +81,7 @@ public class Wrist extends Subsystem {
     return finished;
   }
   public double getAngle(){
-    return wristEncoder.getDistance()*ANGLE_TO_ROTATION;
+    return wristEncoder.getDistance();
   }
   public void stop(){
     wristTalon.set(0);
