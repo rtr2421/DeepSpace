@@ -58,7 +58,6 @@ public class Arm extends Subsystem {
   
   public int readPos(){
     if(!reedSwitch_1.get()){
-      SmartDashboard.putBoolean("Arm position 1", true);
       position = 1;
     }else if(!reedSwitch_2.get()){
       position = 2;

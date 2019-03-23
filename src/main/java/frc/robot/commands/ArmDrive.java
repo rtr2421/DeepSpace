@@ -44,10 +44,10 @@ public class ArmDrive extends Command {
       Robot.arm.stop();
     }
     if(OI.xBoxControl.getY(Hand.kLeft) > 0 && !OI.xBoxControl.getStickButton(Hand.kLeft)){
-      Robot.m_wrist.setTarget(Robot.m_wrist.getAngle() + 1);
+      Robot.m_wrist.raise();
       Robot.m_wrist.move();
     }else if(OI.xBoxControl.getY(Hand.kLeft) < 0 && !OI.xBoxControl.getStickButton(Hand.kLeft)){
-      Robot.m_wrist.setTarget(Robot.m_wrist.getAngle() + 1);
+      Robot.m_wrist.lower();
       Robot.m_wrist.move();
     }else if(OI.xBoxControl.getStickButton(Hand.kLeft)){
       Robot.m_wrist.setTarget(WRIST_POSISTION_STRAIGHT);

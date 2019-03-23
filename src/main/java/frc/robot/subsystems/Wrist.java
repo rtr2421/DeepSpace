@@ -57,7 +57,7 @@ public class Wrist extends Subsystem {
     }
     //forward = down  backwards = up
     if(down){
-      if(getAngle() < targetAngle && getAngle() >= BOTTOM){
+      if(getAngle() < targetAngle || getAngle() <= BOTTOM){
         finished = true;
         wristTalon.set(0);
       }else{
@@ -65,12 +65,12 @@ public class Wrist extends Subsystem {
         wristTalon.set(SPEED);
       }
     }else{
-      if(getAngle() < targetAngle && getAngle() <= TOP) {
-        wristTalon.set(-SPEED);
-      }
-      else {
+      if(getAngle() > targetAngle || getAngle() >= TOP) {
         finished = true;
         wristTalon.set(0);
+      }
+      else {
+        wristTalon.set(-SPEED);
       }
       
     }
@@ -98,5 +98,11 @@ public class Wrist extends Subsystem {
   }
   public void stop(){
     wristTalon.set(0);
+  }
+  public void raise(){
+    wristTalon.set(-SPEED);
+  }
+  public void lower(){
+    wristTalon.set(SPEED);
   }
 }
