@@ -9,13 +9,8 @@ package frc.robot.subsystems;
 
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmDrive;
 
@@ -49,8 +44,8 @@ public class Arm extends Subsystem {
 
   public void move(){
 
-       motorL.set(speed * leftMod);
-       motorR.set(speed * rightMod);
+       motorL.set(speed);
+       motorR.set(speed);
   }
   
   public int readPos(){
@@ -68,8 +63,8 @@ public class Arm extends Subsystem {
     return switchBottom.get();
   }
   public void moveDown(){
-      motorL.set(-speed * leftMod);
-      motorR.set(-speed * rightMod);
+      motorL.set(-speed);
+      motorR.set(-speed);
   }
   public void stop(){
     motorL.set(0);
