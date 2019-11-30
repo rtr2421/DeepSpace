@@ -7,53 +7,66 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
 
-public class JoystickDrive extends Command {
-  boolean tankDrive = false;
-  public JoystickDrive() {
+public class ClimbStair extends Command {
+  boolean finished = false;
+  int step = 0;
+  // Step is 49 in deep
+  final static double firstDistance = 55;
+  final static double secondDistance = 29;
+  public ClimbStair() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.m_climb);
     requires(Robot.m_driveTrain);
+    requires(Robot.m_ultraSonic);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    SmartDashboard.putBoolean("Climb run", true);
+    Robot.m_climb.liftFront();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double rightSpeed = 0.0;
-    double leftSpeed = 0.0;
-    
-
-    /*if(tankDrive){
-      leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    }else{*/
-      leftSpeed = -OI.xBoxControl.getX(Hand.kRight);
-      rightSpeed = -OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
-      SmartDashboard.putNumber("Drive train value", rightSpeed);
-    //}
-    SmartDashboard.putNumber("GyroAngle", Robot.m_driveTrain.getGyroZ());
-    //SmartDaShboard.putNumber("Left Speed: ", leftSpeed);
-    //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
+    if(step == 0){
+      if(Robot.m_ultraSonic.getDistance() < firstDistance){
+        step++;
+      }else{
+        Robot.m_driveTrain.drive(.75, 0);
+      }
+    }else if(step == 1){
+      Robot.m_climb.dropFront();
+      step++;
+    }else if(step == 2){
+      Robot.m_climb.liftBack();
+      step++;
+    }else if(step == 3){
+      if(Robot.m_ultraSonic.getDistance() > secondDistance){
+        Robot.m_driveTrain.drive(.75, 0);
+      }
+    }else if(step == 4){
+      Robot.m_climb.dropBack();
+    }else if(step == 5){
+      if(Robot.m_ultraSonic.getDistance() > 10){
+        Robot.m_driveTrain.drive(.5, 0);
+      }else{
+        step++;
+      }
+    }else if(step == 6){
+      finished = true;
+    }
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return finished;
   }
 
   // Called once after isFinished returns true

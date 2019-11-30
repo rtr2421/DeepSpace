@@ -7,10 +7,19 @@
 
 package frc.robot;
 
+import java.awt.event.KeyListener;
+import java.util.ResourceBundle.Control;
+
+import edu.wpi.first.wpilibj.Controller;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.CameraI2c;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,8 +55,44 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public static XboxController xBoxControl = new XboxController(0);
-
+  public static Joystick xBoxControlArm = new Joystick(1);
+  Button pistonExtend = new JoystickButton(xBoxControl, 8);
+  Button pistonRetract = new JoystickButton(xBoxControl, 7);
+  Button lowRocket_c = new JoystickButton(xBoxControlArm, 1);
+  Button midRocket_c = new JoystickButton(xBoxControlArm, 2);
+  Button button = new JoystickButton(xBoxControl, 2);
+  Button climb = new JoystickButton(xBoxControl, 1);
+  Button highRocket_c = new JoystickButton(xBoxControlArm, 3);
+  Button lowRocket_h = new JoystickButton(xBoxControlArm, 4);
+  Button cargoShip_h = new JoystickButton(xBoxControlArm, 6);
+  Button midRocket_h = new JoystickButton(xBoxControlArm, 5);
   public OI() {
-   // Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
+    //Button rTrig = new JoystickButton(xBoxControl, buttonNumber)
+    
+    pistonExtend.whenPressed(new ExtendPiston());
+    
+    pistonRetract.whenPressed(new RetractPiston());
+    climb.whenPressed(new ClimbStair());
+    button.whenPressed(new TurnDegrees());
+
+    
+    lowRocket_c.whenPressed(new MoveArmTo(1));
+    
+    midRocket_c.whenActive(new MoveArmTo(2));
+
+    highRocket_c.whenActive(new MoveArmTo(3));
+
+
+    lowRocket_h.whenPressed(new MoveArmTo(4));
+
+    midRocket_h.whenPressed(new MoveArmTo(5));
+    //not possible to do high rocket hatch due to no teleArm
+
+
+    cargoShip_h.whenPressed(new MoveArmTo(6));
+
+    /*Button aButton = new JoystickButton(xBoxControl, 1);
+    aButton.whenPressed(new ExtendPiston());
+    aButton.whenReleased(new StopTeleArm());*/
   }
 }

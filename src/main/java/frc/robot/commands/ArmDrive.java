@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
 
-public class JoystickDrive extends Command {
-  boolean tankDrive = false;
-  public JoystickDrive() {
+public class ArmDrive extends Command {
+  public static final double WRIST_POSISTION_STRAIGHT = 15;
+  int count = 1;
+  public ArmDrive() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_driveTrain);
+    requires(Robot.arm);
+    requires(Robot.m_wrist);
   }
 
   // Called just before this Command runs the first time
@@ -30,25 +30,29 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double rightSpeed = 0.0;
-    double leftSpeed = 0.0;
+    SmartDashboard.putBoolean("Swtich one", Robot.arm.switchOne());
+    SmartDashboard.putBoolean("Switch two", Robot.arm.switchTwo());
+    SmartDashboard.putBoolean("Switch three", Robot.arm.switchThree());
+    SmartDashboard.putNumber("Arm position", Robot.arm.readPos());
+    if(OI.xBoxControl.getBumper(Hand.kLeft)){
+      Robot.arm.move();
+      SmartDashboard.putBoolean("Arm moving", true);
+    }else if(OI.xBoxControl.getBumper(Hand.kRight)){
+      Robot.arm.moveDown();
+      SmartDashboard.putBoolean("Arm moving", true);
+    }else{
+      SmartDashboard.putBoolean("Arm moving", false);
+      Robot.arm.stop();
+    }
+    if(OI.xBoxControl.getY(Hand.kLeft) > .1 || OI.xBoxControl.getY(Hand.kLeft) < .1){
+      Robot.m_wrist.raise(OI.xBoxControl.getY(Hand.kLeft));
+    }
+    if(OI.xBoxControl.getStickButton(Hand.kLeft)){
+      Robot.m_wrist.setTarget(WRIST_POSISTION_STRAIGHT);
+      Robot.m_wrist.move();
+    }
     
-
-    /*if(tankDrive){
-      leftSpeed = OI.xBoxControl.getY(Hand.kLeft);
-      rightSpeed = OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.tankDrive(leftSpeed, rightSpeed);
-    }else{*/
-      leftSpeed = -OI.xBoxControl.getX(Hand.kRight);
-      rightSpeed = -OI.xBoxControl.getY(Hand.kRight);
-      Robot.m_driveTrain.drive(rightSpeed, leftSpeed);
-      SmartDashboard.putNumber("Drive train value", rightSpeed);
-    //}
-    SmartDashboard.putNumber("GyroAngle", Robot.m_driveTrain.getGyroZ());
-    //SmartDaShboard.putNumber("Left Speed: ", leftSpeed);
-    //SmartDashboard.putNumber("Right Speed: ", rightSpeed);
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

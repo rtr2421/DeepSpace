@@ -8,16 +8,27 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Teleop;
+import frc.robot.commands.TurnDegrees;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.CameraI2c;
+import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.LaserFinder;
+import frc.robot.subsystems.Photoresistor;
+import frc.robot.subsystems.pneumatics;
+import frc.robot.subsystems.UltraSonic;
+import frc.robot.subsystems.Wrist;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,29 +39,60 @@ import frc.robot.subsystems.Pneumatics;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static Pneumatics m_pneumatics;
+  public static pneumatics m_pneumatics;
   public static OI m_oi;
   public static DriveTrain m_driveTrain;
-  
+  //public static final ADIS16448_IMU imu = new ADIS16448_IMU();
+  public static Teleop m_teleop;
   Command m_autonomousCommand;
+  Compressor com = new Compressor(0);
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-
+  public static UltraSonic m_ultraSonic;
+  public static Claw claw;
+  public static CameraI2c camera;
+  public static Arm arm;
+  public static Photoresistor resistor;
+  public static Timer m_timer;
+  public static LaserFinder m_laser;
+  public static Wrist m_wrist;
+  public static Climb m_climb;
+  //public static Ramps m_ramps;
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    * 
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    m_pneumatics = new Pneumatics();
+    SmartDashboard.putBoolean("Arm moving",false);
+    com.setClosedLoopControl(true);
+    com.start();
+    m_climb = new Climb();
+    claw = new Claw();
+    arm = new Arm();
+    camera = new CameraI2c();
     m_driveTrain = new DriveTrain();
-     //chooser.addOption("My Auto", new MyAutoCommand());
+    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    m_pneumatics = new pneumatics();
     SmartDashboard.putData("Auto mode", m_chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
+    Scheduler.getInstance().add(new Teleop());
+    resistor = new Photoresistor();
+    m_timer = new Timer();
+    m_laser = new LaserFinder();
+    SmartDashboard.putBoolean("TankDrive", false);
+    m_wrist = new Wrist();
+    m_climb.dropFront();
+    m_climb.dropBack();
+    m_ultraSonic = new UltraSonic();
     
+    //Scheduler.getInstance().add(new GetDistance());
+    //OI must be init last
+    SmartDashboard.putNumber("Claw Speed", claw.speed);
+    SmartDashboard.putNumber("Offset", TurnDegrees.offset); 
+    m_oi = new OI();
+    m_timer.start();
   }
 
   /**
@@ -63,15 +105,48 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Wrist Encoder", m_wrist.getAngle());
+    SmartDashboard.putNumber("Reed switch", arm.readPos());
+    SmartDashboard.putNumber("String pot", arm.readPos());
+    SmartDashboard.putNumber("UltraSonic", m_ultraSonic.getDistance());
+    //--------------------------Do 10 times per Second --------------------------------------------------
+    if(m_timer.hasPeriodPassed(.1)){
+      CameraI2c.read();
+      m_laser.read();
+      m_timer.reset();
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //m_serialPort.getString();  //REMOVE LATER LSKJDFLKSDFLJAFHSDGJOEWJ9248&(*#@!^%(*!@&$(*@&$37)))
+    //CameraI2c.read();
+    /*
+    SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
+    SmartDashboard.putNumber("Gyro-Y", m_driveTrain.getGyroY());
+    SmartDashboard.putN
+    umber("Gyro-Z", m_driveTrain.getGyroZ());
+    */
+    /*
+    TurnDegrees.offset = SmartDashboard.getNumber("Offset",  TurnDegrees.offset);
+    SmartDashboard.putNumber("Offset", TurnDegrees.offset);
+    /*
+    SmartDashboard.putNumber("Gyro-X", m_driveTrain.getGyroX());
+    SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
+    SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
+    
+    SmartDashboard.putNumber("Accel-X", imu.getAccelX());
+    SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
+    SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
+    
+    SmartDashboard.putNumber("Pitch", imu.getPitch());
+    SmartDashboard.putNumber("Roll", imu.getRoll());
+    SmartDashboard.putNumber("Yaw", imu.getYaw());
+    
+    SmartDashboard.putNumber("Pressure: ", imu.getBarometricPressure());
+    SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
+    */
   }
-
-  /**
-   * This function is called once each time the robot enters Disabled mode.
-   * You can use it to reset any subsystem information you want to clear when
-   * the robot is disabled.
-   */
   @Override
   public void disabledInit() {
+    
   }
 
   @Override
@@ -117,13 +192,16 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    Scheduler.getInstance().run();
     
   }
 
@@ -132,6 +210,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    //CameraI2c.read();
     Scheduler.getInstance().run();
   }
 

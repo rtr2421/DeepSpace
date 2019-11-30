@@ -6,12 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.Pneumatics;
 
 public class PneumaticsDrive extends Command {
   public PneumaticsDrive() {
@@ -22,19 +19,28 @@ public class PneumaticsDrive extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("init");
+    //System.out.println("init");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("exec");
-    if(OI.xBoxControl.getTriggerAxis(Hand.kLeft)>0) {
-      Pneumatics.retract();
+    /*if(OI.xBoxControl.getBumperPressed(Hand.kLeft)) {
+      pneumatics.retract();
     }
-    if(OI.xBoxControl.getTriggerAxis(Hand.kRight)>0) {
-      Pneumatics.extend();
+    if(OI.xBoxControl.getBumperPressed(Hand.kRight)) {
+      pneumatics.extend();
     }
+    */
+    if(OI.xBoxControl.getYButtonPressed()){
+      Robot.m_pneumatics.toggleOut();
+      if(Robot.m_pneumatics.getOut()){
+        Robot.m_pneumatics.retract();
+      }else{
+        Robot.m_pneumatics.extend();
+      }
+    }
+
     
   }
 
